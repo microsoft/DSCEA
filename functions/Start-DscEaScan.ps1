@@ -79,6 +79,7 @@ param
 
             [Microsoft.Management.Infrastructure.CimSession]$CimSession
             )
+
             function kill-DSCEngine {
                 [CmdletBinding()]
                 param
@@ -86,24 +87,30 @@ param
                     [ValidateNotNullOrEmpty()]
                     [string[]]$ComputerName
                 )
-        
-                #kill the dsc processes on the remote system
-                Invoke-Command -ComputerName $ComputerName -ErrorAction SilentlyContinue -ScriptBlock {
 
+                #kill the dsc processes on the remote system
+                Invoke-Command -ComputerName $ComputerName -ScriptBlock {
+        
                     ### find the process that is hosting the DSC engine
-                    $dscProcessID = Get-WmiObject msft_providers | Where-Object {$_.provider -like 'dsccore'} | Select-Object -ExpandProperty HostProcessIdentifier
-         
+                    $dscProcess = Get-WmiObject msft_providers | 
+                    Where-Object {$_.provider -like 'dsccore'} | 
+                    Select-Object -ExpandProperty HostProcessIdentifier 
+        
                     ### Stop the process
-                    Get-Process -Id $dscProcessID | Stop-Process -Force
-                }
+                    do {
+                        $processID = Get-Process -Id $dscProcess
+                        $processID | Stop-Process -Force}
+                    while ($processID.ProcessName -match "WmiPrvSE")
+                } -ErrorAction SilentlyContinue
             }
+
         $runTime = Measure-Command {
             try
             {
                 if ($ForceScan) {
-                    #executed twice, we have noticed sometimes the first attempt does not actually kill the DSC engine and release the consistency check, this will be fixed in a later version
-                    kill-DSCEngine -ComputerName $computer
-                    kill-DSCEngine -ComputerName $computer
+                    for ($i=1; $i -lt 10; $i++) { 
+                        kill-DSCEngine -ComputerName $computer -ErrorAction SilentlyContinue
+                    }
                 }
                 if($PSBoundParameters.ContainsKey('CimSession')) {
                     $DSCJob = Test-DSCConfiguration -ReferenceConfiguration $mofFile -CimSession $CimSession -AsJob | Wait-Job -Timeout $JobTimeout
@@ -113,8 +120,9 @@ param
                 }
                 if (!$DSCJob) { 
                     $JobFailedError = "$computer was unable to complete in the alloted job timeout period of $JobTimeout seconds"
-                    kill-DSCEngine -ComputerName $computer
-                    kill-DSCEngine -ComputerName $computer
+                    for ($i=1; $i -lt 10; $i++) { 
+                        kill-DSCEngine -ComputerName $computer -ErrorAction SilentlyContinue
+                    }
                     return
                 }
                 $compliance = Receive-Job $DSCJob -ErrorVariable JobFailedError
@@ -153,8 +161,6 @@ param
         }
     }
     else {
-        #introduce while logic here as well or recommend apply-once lcm
-        #replace invoke-command with runspaces
         Write-Verbose "Testing connectivity and PowerShell version of remote systems (All Systems must be running PowerShell 5)"
     
         if($PSBoundParameters.ContainsKey('ComputerName')){
@@ -168,7 +174,6 @@ param
             $PSVersionTable.PSVersion
         } | Wait-Job -Timeout 120
         $psjobresults = Receive-Job $psresults
-        #provides timeout but error variable not working
 
         $runlist =  ($psjobresults | where-object -Property Major -ge 5).PSComputername
         $versionerrorlist =  ($psjobresults | where-object -Property Major -lt 5).PSComputername
@@ -195,6 +200,7 @@ param
             }
         }
     }
+
     #Wait for Jobs to Complete
     Write-Verbose "Processing Compliance Testing..."
     $overalltimeout = new-timespan -Seconds $ScanTimeout
