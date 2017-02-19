@@ -10,7 +10,7 @@ Creates SampleConfig.ps1 in Program Files\DSCEA folder
 htt://aka.ms/dscea
 #>
     if(Test-Path $location\SampleConfig.ps1){
-        Write-Host "$location\SampleConfig.ps1 already exists"
+        write-output "$location\SampleConfig.ps1 already exists"
     }
     else {
 @'
@@ -96,7 +96,7 @@ MemberServerSecuritySettings -OutputPath $env:ProgramFiles\DSC-EA
 '@ | Set-Content -Path $location\SampleConfig.ps1 -Force
     }
     if(Test-Path $location\SampleApplyConfig.ps1){
-        Write-Host "$location\SampleApplyConfig.ps1 already exists"
+        write-output "$location\SampleApplyConfig.ps1 already exists"
     }
     else {
 @'
