@@ -20,7 +20,7 @@ Describe $sut {
             $result = New-DscEaSampleComputers
             $result | Assert-MockCalled New-Item -Times 1
             $result | Assert-MockCalled Set-Content -Times 1
-            #$result | Assert-MockCalled writeFile -Times 1
+            $result | Assert-MockCalled writeFile -Times 1
         }
     }
 }
