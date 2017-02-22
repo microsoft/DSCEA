@@ -64,7 +64,7 @@ This command returns true/false per configuration item, per machine
         [parameter(Mandatory = $true , ParameterSetName = 'Detailed')]
         [switch]$Detailed,
 
-        [String]$InFile = (helper-GetNewestXML).FullName,
+        [String]$InFile = (Get-ChildItem $location\Output\results*.xml | Sort-Object -Property LastWriteTime -Descending | Select -First 1).FullName,
 
         [String]$OutPath = "$env:ProgramFiles\DSC-EA\Output"
     )
