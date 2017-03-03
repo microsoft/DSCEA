@@ -1,0 +1,77 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: sidebar
+  product: DSCEA
+  version: 1.0.0.0
+  folders:
+
+  - title: Overview
+    output: web
+    folderitems:
+
+    - title: Introduction
+      url: /index.html
+      output: web
+      type: homepage
+
+    - title: Background
+      url: /mydoc_background.html
+      output: web
+
+    - title: System Requirements
+      url: /mydoc_sysreqs.html
+      output: web
+
+  - title: Release Notes
+    output: web
+    folderitems:
+
+    - title: 1.0.0.0 Release notes
+      url: /mydoc_release_1000.html
+      output: web
+
+  - title: Installation
+    output: web
+    folderitems:
+
+    - title: Install from PowerShell Gallery
+      url: /mydoc_psgallery_install.html
+      output: web
+
+    - title: Download from PowerShell Gallery - Offline Install
+      url: /mydoc_psgallery_download.html
+      output: web
+
+  - title: Usage
+    output: web
+    folderitems:
+
+    - title: Prerequisite Steps
+      url: /mydoc_prereq_steps.html
+      output: web
+
+    - title: Scan Execution
+      url: /mydoc_scan.html
+      output: web
+
+    - title: Report Generation – HTML
+      url: /mydoc_report_web.html
+      output: web
+
+    - title: Report Generation – Power BI
+      url: /mydoc_report_powerbi.html
+      output: web
+      
+    - title: Use Cases
+      url: /mydoc_use_cases.html
+      output: web
+
+  - title: Contributing
+    output: web
+    folderitems:
+
+    - title: How can you help contribute?
+      url: /mydoc_contributing.html
+      output: web
+      
