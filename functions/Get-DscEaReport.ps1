@@ -64,7 +64,7 @@ This command returns true/false per configuration item, per machine
         [parameter(Mandatory = $true , ParameterSetName = 'Detailed')]
         [switch]$Detailed,
 
-        [String]$InFile = (Get-ChildItem $location\Output\results*.xml | Sort-Object -Property LastWriteTime -Descending | Select -First 1).FullName,
+        [String]$InFile = (Get-ChildItem $location\Output\results*.xml | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1).FullName,
 
         [String]$OutPath = "$env:ProgramFiles\DSC-EA\Output"
     )
@@ -74,14 +74,14 @@ This command returns true/false per configuration item, per machine
     if($Overall){
         $results | 
         select-object -ExpandProperty Compliance | Where-Object {$_.PSComputerName -ne $null} |
-        select @{Name="Computer";Expression={$_.PSComputerName}}, @{Name="Compliant";Expression={$_.InDesiredState}} |
+        select-object @{Name="Computer";Expression={$_.PSComputerName}}, @{Name="Compliant";Expression={$_.InDesiredState}} |
         ConvertTo-HTML -Head $webstyle -body "<img src='logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
         Out-File $env:ProgramFiles\DSC-EA\Output\OverallComplianceReport.html
         Write-Host "Report $OutPath\OverallComplianceReport.html generated"
     }
     if($Detailed){
-        $results | % {
-            $_.Compliance | % {
+        $results | ForEach-Object {
+            $_.Compliance | ForEach-Object {
         $_.ResourcesNotInDesiredState | 
         Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
         }
@@ -90,10 +90,10 @@ This command returns true/false per configuration item, per machine
     Write-Host "Report $OutPath\DetailedComplianceReport.html generated"
     }
     if($ItemName){
-        $results | % {
-            $_.Compliance | % {
-                $_.ResourcesInDesiredState | % {$_ | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState}
-                $_.ResourcesNotInDesiredState | % {$_ | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState}
+        $results | ForEach-Object {
+            $_.Compliance | ForEach-Object {
+                $_.ResourcesInDesiredState | ForEach-Object {$_ | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState}
+                $_.ResourcesNotInDesiredState | ForEach-Object {$_ | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState}
             }
         } | Where-object {$_.InstanceName -ieq $ItemName} | 
         ConvertTo-HTML -Head $webstyle -body "<img src='logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
@@ -102,7 +102,7 @@ This command returns true/false per configuration item, per machine
     }
     if($ComputerName){
         $results | where-object {$_.Computer -ieq $ComputerName} | % {
-            $_.Compliance | % {
+            $_.Compliance | ForEach-Object {
                 $_.ResourcesNotInDesiredState | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
                 $_.ResourcesInDesiredState | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
             }

@@ -207,7 +207,7 @@ param
     $elapsedTime = [system.diagnostics.stopwatch]::StartNew()
     do {
         Start-Sleep -Milliseconds 500
-        $jobscomplete = ($jobs.result.iscompleted | where {$_ -eq $true}).count
+        $jobscomplete = ($jobs.result.iscompleted | Where-Object {$_ -eq $true}).count
 
         #pecentage complete can be added as the number of jobs completed out of the number of total jobs
         Write-Progress -activity "Working..." -PercentComplete (($jobscomplete / $jobs.count)*100) -status "$([string]::Format("Time Elapsed: {0:d2}:{1:d2}:{2:d2}     Jobs Complete: {3} of {4} ", $elapsedTime.Elapsed.hours, $elapsedTime.Elapsed.minutes, $elapsedTime.Elapsed.seconds, $jobscomplete, $jobs.count))";
