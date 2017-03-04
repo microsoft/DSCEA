@@ -26,8 +26,7 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$MofFile = (Join-Path $location 'localhost.mof'),
 
-        [ValidateNotNullOrEmpty()]
-        [string]$ComputersFile = (Join-Path $location 'computers.ps1'),
+        [string]$InputFile,
 
         [ValidateNotNullOrEmpty()]
         [string]$JobTimeout = 600,
@@ -167,7 +166,7 @@ param
             $firstrunlist = $ComputerName
         }
         else {
-            $firstrunlist = (Get-Content $ComputersFile)
+            $firstrunlist = (Get-Content $$InputFile)
         }
 
         $psresults = Invoke-Command -ComputerName $firstrunlist -ErrorAction SilentlyContinue -AsJob -ScriptBlock {
