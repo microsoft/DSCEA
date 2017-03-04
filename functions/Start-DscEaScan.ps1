@@ -1,4 +1,4 @@
-function Start-DscEaScan {
+function Start-DSCEAScan {
 <#   
 .SYNOPSIS   
 Will run Test-DscConfiguration -ReferenceConfiguration against the remote systems listed in $env:ProgramFiles\DSC-EA\computers.ps1 and saves the results to a XML file in $env:ProgramFiles\DSC-EA\Output

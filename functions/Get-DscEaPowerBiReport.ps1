@@ -1,4 +1,4 @@
-function Get-DscEaPowerBiReport {
+function Get-DSCEAPowerBiReport {
     [CmdLetBinding()]
     param
     (

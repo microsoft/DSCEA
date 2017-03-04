@@ -1,4 +1,4 @@
-function Insert-DscEaCSVtoSQL {
+function Insert-DSCEACSVtoSQL {
     param(
         [Parameter(Mandatory=$true)][string]$SQLserver,
         [Parameter(Mandatory=$true)][string]$DatabaseName,
