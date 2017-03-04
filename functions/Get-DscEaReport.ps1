@@ -101,7 +101,7 @@ This command returns true/false per configuration item, per machine
         Write-Host "Report $OutPath\ItemComplianceReport-$ItemName.html generated"
     }
     if($ComputerName){
-        $results | where-object {$_.Computer -ieq $ComputerName} | % {
+        $results | where-object {$_.Computer -ieq $ComputerName} | ForEach-Object {
             $_.Compliance | ForEach-Object {
                 $_.ResourcesNotInDesiredState | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
                 $_.ResourcesInDesiredState | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
