@@ -1,7 +1,7 @@
 function Start-DSCEAScan {
 <#   
 .SYNOPSIS   
-Will run Test-DscConfiguration -ReferenceConfiguration against the remote systems listed in $env:ProgramFiles\DSC-EA\computers.ps1 and saves the results to a XML file in $env:ProgramFiles\DSC-EA\Output
+Will run Test-DscConfiguration -ReferenceConfiguration against the remote systems listed in $env:ProgramFiles\DSCEA\computers.ps1 and saves the results to a XML file in $env:ProgramFiles\DSCEA\Output
 
 .DESCRIPTION 
 Run this function after you have a list of remote systems to scan and a localhost.MOF file created that defines the settings you want to check against.
@@ -44,8 +44,8 @@ param
         [Microsoft.Management.Infrastructure.CimSession[]]$CimSession
     )
 
-    #Begin DSC-EA Engine
-    Write-Verbose "DSC-EA Scan has started"
+    #Begin DSCEA Engine
+    Write-Verbose "DSCEA Scan has started"
     $runspacePool = [RunspaceFactory]::CreateRunspacePool(1, 10).Open() #Min Runspaces, Max Runspaces
     $scriptBlock = {
         param (
@@ -135,7 +135,7 @@ param
                 ForceScan = $ForceScan
             }
             $job = [Powershell]::Create().AddScript($scriptBlock).AddParameters($params)
-            Write-Verbose ('Initiating DSC-EA scan on {0}' -f $_.ComputerName)
+            Write-Verbose ('Initiating DSCEA scan on {0}' -f $_.ComputerName)
 		    $job.RunSpacePool = $runspacePool
             $jobs += [PSCustomObject]@{
                     Pipe = $job
@@ -175,7 +175,7 @@ param
                 ForceScan = $ForceScan
             }
             $job = [Powershell]::Create().AddScript($scriptBlock).AddParameters($params)
-            Write-Verbose "Initiating DSC-EA scan on $_"
+            Write-Verbose "Initiating DSCEA scan on $_"
 		    $job.RunSpacePool = $runspacePool
             $jobs += [PSCustomObject]@{
                     Pipe = $job
@@ -196,7 +196,7 @@ param
         Write-Progress -activity "Working..." -PercentComplete (($jobscomplete / $jobs.count)*100) -status "$([string]::Format("Time Elapsed: {0:d2}:{1:d2}:{2:d2}     Jobs Complete: {3} of {4} ", $elapsedTime.Elapsed.hours, $elapsedTime.Elapsed.minutes, $elapsedTime.Elapsed.seconds, $jobscomplete, $jobs.count))";
        
         if ($elapsedTime.elapsed -gt $overalltimeout) {
-            Write-Warning "The DSC-EA scan was unable to complete because the timeout value of" $overalltimeout.TotalSeconds "seconds was exceeded." -ForegroundColor Red
+            Write-Warning "The DSCEA scan was unable to complete because the timeout value of" $overalltimeout.TotalSeconds "seconds was exceeded." -ForegroundColor Red
             return
         }
     } while (($jobs.Result.IsCompleted -contains $false) -and ($elapsedTime.elapsed -lt $overalltimeout)) #while elasped time < 1 hour by default
@@ -218,12 +218,12 @@ param
     #currently presents an ugly divide by zero message if the only systems in the list are below PowerShell 5
     if ($versionerrorlist){
         #add in comma separated option for multiple systems
-        Write-Warning "The DSC-EA scan completed but did not scan all systems.  Please check '$PSVersionErrorsFile' for details"
+        Write-Warning "The DSCEA scan completed but did not scan all systems.  Please check '$PSVersionErrorsFile' for details"
         $versionerrorlist | Export-Clixml -Path $PSVersionErrorsFile -Force
     }
 
     if ($results.Exception){
-        Write-Warning "The DSC-EA scan completed but job errors were detected.  Please check '$ResultsFile' for details"
+        Write-Warning "The DSCEA scan completed but job errors were detected.  Please check '$ResultsFile' for details"
     }
 
 }
