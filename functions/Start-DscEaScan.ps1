@@ -18,16 +18,16 @@ http://aka.ms/dscea
 param
     (
         [ValidateNotNullOrEmpty()]
-        [string]$OutputPath = (Join-Path $location 'Output'),
+        [string]$OutputPath = '.',
 
         [ValidateNotNullOrEmpty()]
-        [string]$LogsPath = (Join-Path $location 'Logs'),
+        [string]$LogsPath = '.',
 
         [ValidateNotNullOrEmpty()]
-        [string]$MofFile = (Join-Path $location 'localhost.mof'),
+        [string]$MofFile = '.\localhost.mof',
 
         [ValidateNotNullOrEmpty()]
-        [string]$ComputersFile = (Join-Path $location 'computers.ps1'),
+        [string]$ComputersFile = '.',
 
         [ValidateNotNullOrEmpty()]
         [string]$JobTimeout = 600,
@@ -38,28 +38,12 @@ param
         [boolean]$ForceScan = $False,
 
         [ValidateNotNullOrEmpty()]
-        [string]$ResultsFile = (Join-Path $OutputPath "results.$(Get-Date -Format 'yyyyMMdd-HHmm-ss').xml"),
+        [string]$ResultsFile = "results.$(Get-Date -Format 'yyyyMMdd-HHmm-ss').xml",
 
         [string[]]$ComputerName,
 
         [Microsoft.Management.Infrastructure.CimSession[]]$CimSession
     )
-
-    #Begin Output Directory Creation
-    if (Test-Path $OutputPath) {
-    } 
-    else {
-        New-Item $OutputPath -ItemType Directory
-    }
-    #End Output Directory Creation
-
-    #Begin Logs Directory Creation
-    if (Test-Path $LogsPath) {
-    } 
-    else {
-        New-Item $LogsPath -ItemType Directory
-    }
-    #End Logs Directory Creation
 
     #Begin DSC-EA Engine
     Write-Verbose "DSC-EA Scan has started"
@@ -229,8 +213,8 @@ param
 
     #Save Results
     Write-Verbose "$([string]::Format("Total Scan Time: {0:d2}:{1:d2}:{2:d2}", $elapsedTime.Elapsed.hours, $elapsedTime.Elapsed.minutes, $elapsedTime.Elapsed.seconds))"
-    $results | Export-Clixml -Path $ResultsFile -Force
-    Get-ItemProperty $ResultsFile
+    $results | Export-Clixml -Path (Join-Path  -Path $OutputPath -Child $ResultsFile) -Force
+    Get-ItemProperty (Join-Path  -Path $OutputPath -Child $ResultsFile)
 
     #currently presents an ugly divide by zero message if the only systems in the list are below PowerShell 5
     if ($versionerrorlist){
