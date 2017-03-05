@@ -24,7 +24,7 @@ param
         [string]$LogsPath = '.',
 
         [ValidateNotNullOrEmpty()]
-        [string]$MofFile = '.\localhost.mof',
+        [string]$MofFile = 'localhost.mof',
 
         [string]$InputFile,
 
@@ -46,6 +46,7 @@ param
 
     #Begin DSCEA Engine
     Write-Verbose "DSCEA Scan has started"
+    $MofFile = (Get-Item $MofFile).FullName
     $runspacePool = [RunspaceFactory]::CreateRunspacePool(1, 10).Open() #Min Runspaces, Max Runspaces
     $scriptBlock = {
         param (
