@@ -86,7 +86,7 @@ This command returns true/false per configuration item, per machine
         select-object @{Name="Computer";Expression={$_.PSComputerName}}, @{Name="Compliant";Expression={$_.InDesiredState}} |
         ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
         Out-File .\OverallComplianceReport.html
-        Write-Host "Report .\OverallComplianceReport.html generated"
+        Get-ItemProperty "Report .\OverallComplianceReport.html generated"
     }
     if($Detailed){
         $results | ForEach-Object {
@@ -96,7 +96,7 @@ This command returns true/false per configuration item, per machine
         }
     } | ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
     Out-File .\DetailedComplianceReport.html 
-    Write-Host "Report .\DetailedComplianceReport.html generated"
+    Get-ItemProperty "Report .\DetailedComplianceReport.html generated"
     }
     if($ItemName){
         $results | ForEach-Object {
@@ -106,8 +106,8 @@ This command returns true/false per configuration item, per machine
             }
         } | Where-object {$_.InstanceName -ieq $ItemName} | 
         ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
-        Out-File $OutPath\ItemComplianceReport-$ItemName.html
-        Write-Host "Report $OutPath\ItemComplianceReport-$ItemName.html generated"
+        Out-File .\ItemComplianceReport-$ItemName.html
+        Get-ItemProperty "Report .\ItemComplianceReport-$ItemName.html generated"
     }
     if($ComputerName){
         $results | where-object {$_.Computer -ieq $ComputerName} | ForEach-Object {
@@ -115,7 +115,8 @@ This command returns true/false per configuration item, per machine
                 $_.ResourcesNotInDesiredState | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
                 $_.ResourcesInDesiredState | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
             }
-        } | ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | Out-File $OutPath\ComputerComplianceReport-$ComputerName.html 
-        Write-Host "Report $OutPath\ComputerComplianceReport-$ComputerName.html generated"
+        } | ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
+        Out-File .\ComputerComplianceReport-$ComputerName.html 
+        Get-ItemProperty ".\ComputerComplianceReport-$ComputerName.html"
     }
 }
