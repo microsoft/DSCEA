@@ -68,6 +68,9 @@ This command returns true/false per configuration item, per machine
 
         [String]$OutPath = "C:\ProgramData\DSCEA"
     )
+    if(-not (Test-Path C:\ProgramData\DSCEA)) {
+        New-Item C:\ProgramData\DSCEA -type directory    
+    }
     if(-not (Test-Path 'C:\ProgramData\DSCEA\logo.png')) {
         $env:PSModulePath -split ';' | ForEach-Object {
             if(Test-Path (Join-Path $_ 'DSCEA\resources\logo.png')) {
