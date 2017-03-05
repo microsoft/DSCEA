@@ -34,6 +34,18 @@ Describe $sut {
 
     }
     It 'Should be able to use a custom results file' {
+
+    }
+    It 'Should be able to handle a computer name' {
+
+    }
+    It 'Should be able to handle multiple computer names' {
+
+    }
+    It 'Should be able to handle a CIM session' {
+
+    }
+    It 'Should be able to handle multiple CIM sessions' {
         
     }
 }
