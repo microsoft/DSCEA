@@ -1,11 +1,11 @@
-function Insert-DscEaCSVtoSQL {
+function Insert-DSCEACSVtoSQL {
     param(
         [Parameter(Mandatory=$true)][string]$SQLserver,
         [Parameter(Mandatory=$true)][string]$DatabaseName,
         [Parameter(Mandatory=$true)][string]$TableName,
         [Parameter(ParameterSetName='UserNameAuth')][String]$UserName,
         [Parameter(ParameterSetName='UserNameAuth')][SecureString]$Password,
-        [Parameter(ParameterSetName='CredentialAuth')]$Credential,
+        [Parameter(ParameterSetName='CredentialAuth')][PSCredential]$Credential,
         [Parameter(Mandatory=$true)]$InputCSV,
         [switch]$RemoveHeaders
     )
@@ -26,7 +26,7 @@ function Insert-DscEaCSVtoSQL {
     $batchsize = 50000
      
     # Get Username and Password from Credential Object
-    if($PSBoundParameters.ContainsKey('CredentialAuth') {
+    if($PSBoundParameters.ContainsKey('CredentialAuth')) {
         $connectionstring = 'Data Source={0};User Id={1};Password={2};Initial Catalog={3};' -f $SQLServer,($Credential.UserName),($Credential.GetNetworkCredential().Password),$DatabaseName
     }
     # Use Username and Password that were passed in
