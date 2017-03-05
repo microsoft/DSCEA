@@ -26,12 +26,7 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$MofFile = '.\localhost.mof',
 
-<<<<<<< HEAD
-        [ValidateNotNullOrEmpty()]
-        [string]$ComputersFile = '.',
-=======
         [string]$InputFile,
->>>>>>> fad3f144c10cc54c899d3fa1bbcf5d0567095bc5
 
         [ValidateNotNullOrEmpty()]
         [string]$JobTimeout = 600,
