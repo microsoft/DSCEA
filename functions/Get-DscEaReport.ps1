@@ -66,7 +66,7 @@ This command returns true/false per configuration item, per machine
 
         [String]$InFile = (Get-ChildItem $location\Output\results*.xml | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1).FullName,
 
-        [String]$OutPath = "$env:ProgramFiles\DSC-EA\Output"
+        [String]$OutPath = "C:\ProgramData\DSCEA"
     )
     if(-not (Test-Path 'C:\ProgramData\DSCEA\logo.png')) {
         $env:PSModulePath -split ';' | ForEach-Object {
@@ -82,8 +82,8 @@ This command returns true/false per configuration item, per machine
         select-object -ExpandProperty Compliance | Where-Object {$_.PSComputerName -ne $null} |
         select-object @{Name="Computer";Expression={$_.PSComputerName}}, @{Name="Compliant";Expression={$_.InDesiredState}} |
         ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
-        Out-File $env:ProgramFiles\DSC-EA\Output\OverallComplianceReport.html
-        Write-Host "Report $OutPath\OverallComplianceReport.html generated"
+        Out-File .\OverallComplianceReport.html
+        Write-Host "Report .\OverallComplianceReport.html generated"
     }
     if($Detailed){
         $results | ForEach-Object {
@@ -92,8 +92,8 @@ This command returns true/false per configuration item, per machine
         Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
         }
     } | ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
-    Out-File $env:ProgramFiles\DSC-EA\Output\DetailedComplianceReport.html 
-    Write-Host "Report $OutPath\DetailedComplianceReport.html generated"
+    Out-File .\DetailedComplianceReport.html 
+    Write-Host "Report .\DetailedComplianceReport.html generated"
     }
     if($ItemName){
         $results | ForEach-Object {

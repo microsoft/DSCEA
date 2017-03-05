@@ -2,7 +2,7 @@ function Get-DSCEAPowerBiReport {
     [CmdLetBinding()]
     param
     (
-    [String]$OutPath = "$env:ProgramFiles\DSC-EA\Output",
+    [String]$OutPath = "C:\ProgramData\DSCEA",
     
     [String]$ExceptionsFile = $null
     )
