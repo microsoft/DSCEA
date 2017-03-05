@@ -34,7 +34,7 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$ScanTimeout = 3600,
 
-        [boolean]$ForceScan = $False,
+        [switch]$Force,
 
         [ValidateNotNullOrEmpty()]
         [string]$ResultsFile = "results.$(Get-Date -Format 'yyyyMMdd-HHmm-ss').xml",
@@ -59,7 +59,7 @@ param
             [ValidateNotNullOrEmpty()]
             [string]$JobTimeout,
 
-            [boolean]$ForceScan,
+            [switch]$Force,
 
             [Microsoft.Management.Infrastructure.CimSession]$CimSession
             )
@@ -91,7 +91,7 @@ param
         $runTime = Measure-Command {
             try
             {
-                if ($ForceScan) {
+                if ($PSBoundParameters.ContainsKey('Force')) {
                     for ($i=1; $i -lt 10; $i++) { 
                         kill-DSCEngine -ComputerName $computer -ErrorAction SilentlyContinue
                     }
@@ -133,7 +133,9 @@ param
                 CimSession = $_
                 MofFile = $MofFile
                 JobTimeout = $JobTimeout
-                ForceScan = $ForceScan
+            }
+            if($PSBoundParameters.ContainsKey('Force')) {
+                $params += @{Force = $true}
             }
             $job = [Powershell]::Create().AddScript($scriptBlock).AddParameters($params)
             Write-Verbose ('Initiating DSCEA scan on {0}' -f $_.ComputerName)
@@ -173,7 +175,9 @@ param
                 Computer = $_
                 MofFile = $MofFile
                 JobTimeout = $JobTimeout
-                ForceScan = $ForceScan
+            }
+            if ($PSBoundParameters.ContainsKey('Force')) {
+                $params += @{Force = $true}
             }
             $job = [Powershell]::Create().AddScript($scriptBlock).AddParameters($params)
             Write-Verbose "Initiating DSCEA scan on $_"
