@@ -52,16 +52,16 @@ This command returns true/false per configuration item, per machine
     [CmdLetBinding()]
     param
     (
-        [parameter(Mandatory = $true , ParameterSetName = 'Item')]
+        [parameter(Mandatory=$true,ParameterSetName='Item')]
         [String]$ItemName,
 
-        [parameter(Mandatory = $true , ParameterSetName = 'Computer')]
+        [parameter(Mandatory=$true,ParameterSetName='Computer')]
         [String]$ComputerName,
 
-        [parameter(Mandatory=$true , ParameterSetName='Overall')]
+        [parameter(Mandatory=$true,ParameterSetName='Overall')]
         [switch]$Overall,
 
-        [parameter(Mandatory = $true , ParameterSetName = 'Detailed')]
+        [parameter(Mandatory=$true,ParameterSetName='Detailed')]
         [switch]$Detailed,
 
         [String]$InFile = (Get-ChildItem .\results*.xml | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1).FullName,
@@ -81,7 +81,7 @@ This command returns true/false per configuration item, per machine
         $results | 
         select-object -ExpandProperty Compliance | Where-Object {$_.PSComputerName -ne $null} |
         select-object @{Name="Computer";Expression={$_.PSComputerName}}, @{Name="Compliant";Expression={$_.InDesiredState}} |
-        ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
+        ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
         Out-File .\OverallComplianceReport.html
         Write-Host "Report .\OverallComplianceReport.html generated"
     }
