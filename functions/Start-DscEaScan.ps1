@@ -201,7 +201,7 @@ param
         Write-Progress -activity "Working..." -PercentComplete (($jobscomplete / $jobs.count)*100) -status "$([string]::Format("Time Elapsed: {0:d2}:{1:d2}:{2:d2}     Jobs Complete: {3} of {4} ", $elapsedTime.Elapsed.hours, $elapsedTime.Elapsed.minutes, $elapsedTime.Elapsed.seconds, $jobscomplete, $jobs.count))";
        
         if ($elapsedTime.elapsed -gt $overalltimeout) {
-            Write-Warning "The DSCEA scan was unable to complete because the timeout value of" $overalltimeout.TotalSeconds "seconds was exceeded." -ForegroundColor Red
+            Write-Warning "The DSCEA scan was unable to complete because the timeout value of $($overalltimeout.TotalSeconds) seconds was exceeded."
             return
         }
     } while (($jobs.Result.IsCompleted -contains $false) -and ($elapsedTime.elapsed -lt $overalltimeout)) #while elasped time < 1 hour by default
