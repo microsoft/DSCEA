@@ -65,4 +65,4 @@ configuration MemberServerSecuritySettings {
     }            
 }
 
-MemberServerSecuritySettings
+MemberServerSecuritySettings -OutputPath .\

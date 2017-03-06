@@ -1,4 +1,4 @@
-repository: PeterShell/GHPagesTest
+repository: Microsoft/DSCEA
 
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
@@ -9,13 +9,13 @@ topnav_title: DSCEA - Desired State Configuration Environment Analyzer
 site_title: DSCEA
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
-company_name: Your company
+company_name: Microsoft
 # this appears in the footer
 
-github_editme_path: PeterShell/GHPagesTest2/blob/master/docs/
+github_editme_path: Microsoft/DSCEA/blob/dev/docs/
 # if you're using Github, provide the basepath to the branch you've created for reviews, following the sample here. if not, leave this value blank.
 
-disqus_shortname: idrbwjekyll
+disqus_shortname:
 # if you're using disqus for comments, add the shortname here. if not, leave this value blank.
 
 host: 127.0.0.1
@@ -29,9 +29,9 @@ exclude:
   - .gitignore
 # these are the files and directories that jekyll will exclude from the build
 
-feedback_subject_line: Jekyll documentation theme
+feedback_subject_line:
 
-feedback_email: tomjohnson1492@gmail.com
+feedback_email:
 # used as a contact email for the Feedback link in the top navigation bar
 
 # feedback_disable: true
@@ -99,8 +99,8 @@ sidebars:
 - product2_sidebar
 - other
 
-description: "Intended as a documentation theme based on Jekyll for technical writers documenting software and other technical products, this theme has all the elements you would need to handle multiple products with both multi-level sidebar navigation, tags, and other documentation features."
+description: "DSCEA"
 # the description is used in the feed.xml file
 
 # needed for sitemap.xml file only
-url: http://idratherbewriting.com
+url: https://microsoft.github.io/DSCEA
