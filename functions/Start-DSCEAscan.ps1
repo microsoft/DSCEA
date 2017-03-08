@@ -153,7 +153,7 @@ param
             $firstrunlist = $ComputerName
         }
         else {
-            $firstrunlist = (Get-Content $$InputFile)
+            $firstrunlist = Get-Content $InputFile
         }
 
         $psresults = Invoke-Command -ComputerName $firstrunlist -ErrorAction SilentlyContinue -AsJob -ScriptBlock {
