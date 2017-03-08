@@ -19,7 +19,7 @@ Switch parameter indicating that the report generated will display true/false pe
 Switch parameter indicating that the report generated will display true/false per configuration file item, per computer
 
 .LINK
-http://aka.ms/dscea
+https://microsoft.github.io/DSCEA
 
 .EXAMPLE
 Get-DscEaReport -ItemName MicrosoftAntimalwareService

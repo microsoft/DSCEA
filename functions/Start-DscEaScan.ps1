@@ -9,7 +9,7 @@ Run this function after you have defined the remote systems to scan and have cre
 .NOTES   
 
 .LINK
-http://aka.ms/dscea
+https://microsoft.github.io/DSCEA
 
 .EXAMPLE
 . Start-DscEaScan
