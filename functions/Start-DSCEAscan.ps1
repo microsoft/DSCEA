@@ -1,4 +1,4 @@
-function Start-DSCEAScan {
+function Start-DSCEAscan {
 <#   
 .SYNOPSIS   
 Will run Test-DscConfiguration -ReferenceConfiguration against the remote systems supplied and saves the results to a XML file
