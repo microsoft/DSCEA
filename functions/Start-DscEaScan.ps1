@@ -220,7 +220,7 @@ param
     $results | Export-Clixml -Path (Join-Path  -Path $OutputPath -Child $ResultsFile) -Force
     Get-ItemProperty (Join-Path  -Path $OutputPath -Child $ResultsFile)
 
-    #currently presents an ugly divide by zero message if the only systems in the list are below PowerShell 5
+    #This function will display a divide by zero message if no computers are provided that are runnning PowerShell 5 or above
     if ($versionerrorlist){
         #add in comma separated option for multiple systems
         Write-Warning "The DSCEA scan completed but did not scan all systems.  Please check '$PSVersionErrorsFile' for details"
