@@ -1,15 +1,15 @@
 function Start-DSCEAScan {
 <#   
 .SYNOPSIS   
-Will run Test-DscConfiguration -ReferenceConfiguration against the remote systems listed in $env:ProgramFiles\DSCEA\computers.ps1 and saves the results to a XML file in $env:ProgramFiles\DSCEA\Output
+Will run Test-DscConfiguration -ReferenceConfiguration against the remote systems supplied and saves the results to a XML file
 
 .DESCRIPTION 
-Run this function after you have a list of remote systems to scan and a localhost.MOF file created that defines the settings you want to check against.
+Run this function after you have defined the remote systems to scan and have created a localhost.MOF file that defines the settings you want to check against
 
 .NOTES   
 
 .LINK
-http://aka.ms/dscea
+https://microsoft.github.io/DSCEA
 
 .EXAMPLE
 . Start-DscEaScan
@@ -220,7 +220,7 @@ param
     $results | Export-Clixml -Path (Join-Path  -Path $OutputPath -Child $ResultsFile) -Force
     Get-ItemProperty (Join-Path  -Path $OutputPath -Child $ResultsFile)
 
-    #currently presents an ugly divide by zero message if the only systems in the list are below PowerShell 5
+    #This function will display a divide by zero message if no computers are provided that are runnning PowerShell 5 or above
     if ($versionerrorlist){
         #add in comma separated option for multiple systems
         Write-Warning "The DSCEA scan completed but did not scan all systems.  Please check '$PSVersionErrorsFile' for details"
