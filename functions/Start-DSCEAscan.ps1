@@ -64,7 +64,7 @@ param
             [Microsoft.Management.Infrastructure.CimSession]$CimSession
             )
 
-            function kill-DSCEngine {
+            function Repair-DSCEngine {
                 [CmdletBinding()]
                 param
                 (
@@ -93,7 +93,7 @@ param
             {
                 if ($PSBoundParameters.ContainsKey('Force')) {
                     for ($i=1; $i -lt 10; $i++) { 
-                        kill-DSCEngine -ComputerName $computer -ErrorAction SilentlyContinue
+                        Repair-DSCEngine -ComputerName $computer -ErrorAction SilentlyContinue
                     }
                 }
                 if($PSBoundParameters.ContainsKey('CimSession')) {
@@ -105,7 +105,7 @@ param
                 if (!$DSCJob) { 
                     $JobFailedError = "$computer was unable to complete in the alloted job timeout period of $JobTimeout seconds"
                     for ($i=1; $i -lt 10; $i++) { 
-                        kill-DSCEngine -ComputerName $computer -ErrorAction SilentlyContinue
+                        Repair-DSCEngine -ComputerName $computer -ErrorAction SilentlyContinue
                     }
                     return
                 }
