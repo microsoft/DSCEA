@@ -1,10 +1,10 @@
 function Start-DSCEAScan {
 <#   
 .SYNOPSIS   
-Will run Test-DscConfiguration -ReferenceConfiguration against the remote systems listed in $env:ProgramFiles\DSCEA\computers.ps1 and saves the results to a XML file in $env:ProgramFiles\DSCEA\Output
+Will run Test-DscConfiguration -ReferenceConfiguration against the remote systems supplied and saves the results to a XML file
 
 .DESCRIPTION 
-Run this function after you have a list of remote systems to scan and a localhost.MOF file created that defines the settings you want to check against.
+Run this function after you have defined the remote systems to scan and have created a localhost.MOF file that defines the settings you want to check against
 
 .NOTES   
 
