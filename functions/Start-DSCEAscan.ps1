@@ -158,7 +158,7 @@ param
 
         $psresults = Invoke-Command -ComputerName $firstrunlist -ErrorAction SilentlyContinue -AsJob -ScriptBlock {
             $PSVersionTable.PSVersion
-        } | Wait-Job -Timeout 120
+        } | Wait-Job -Timeout $JobTimeout
         $psjobresults = Receive-Job $psresults
 
         $runlist =  ($psjobresults | where-object -Property Major -ge 5).PSComputername
