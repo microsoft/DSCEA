@@ -1,4 +1,4 @@
-function Get-DSCEAReport {
+function Get-DSCEAreport {
 <#   
 .SYNOPSIS   
 Generate a HTML based report after Start-DscEaScan has been run
