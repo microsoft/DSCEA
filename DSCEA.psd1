@@ -27,7 +27,7 @@ CompanyName = 'Microsoft'
 Copyright = '(c) 2016 Microsoft. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'DSCEA is a scanning engine for processing Test-DscConfiguration results'
+Description = 'DSCEA is a scanning engine for processing Test-DSCConfiguration results'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '5.0'
@@ -66,7 +66,7 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module
-FunctionsToExport = ('Convert-DSCEAresultsToCSV','Get-DSCEAreport','Insert-DSCEACSVtoSQL','Start-DSCEAscan')
+FunctionsToExport = ('Convert-DSCEAresultsToCSV','Get-DSCEAreport','Send-DSCEACSVtoSQL','Start-DSCEAscan')
 
 # Cmdlets to export from this module
 CmdletsToExport = '*'
