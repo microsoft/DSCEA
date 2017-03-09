@@ -1,10 +1,10 @@
 function Get-DSCEAreport {
 <#   
 .SYNOPSIS   
-Generate a HTML based report after Start-DscEaScan has been run
+Generate a HTML based report after Start-DSCEAscan has been run
 
 .DESCRIPTION 
-Used to create viewable reports after Start-DscEaScan has created a results.xml file which will be parsed 
+Used to create viewable reports after Start-DSCEAscan has created a results.xml file which will be parsed 
 
 .PARAMETER ItemName
 This is the item name from the configuration file, used to generate a report of every machine's compliance against that item
@@ -22,28 +22,28 @@ Switch parameter indicating that the report generated will display non-compliant
 https://microsoft.github.io/DSCEA
 
 .EXAMPLE
-Get-DscEaReport -ItemName MicrosoftAntimalwareService
+Get-DSCEAreport -ItemName MicrosoftAntimalwareService
 
 Description
 -----------
 This command returns all systems that were scanned and their compliance in regards to the Microsoft AntiMalware Service
 
 .EXAMPLE
-Get-DscEaReport -ComputerName 'dc1'
+Get-DSCEAreport -ComputerName 'dc1'
 
 Description
 -----------
 This command returns all configuration items for computer 'dc1'
 
 .EXAMPLE
-Get-DscEaReport -Overall
+Get-DSCEAreport -Overall
 
 Description
 -----------
 This command returns true/false per machine if they comply with the entire configuration file
 
 .EXAMPLE
-Get-DscEaReport -Detailed
+Get-DSCEAreport -Detailed
 
 Description
 -----------

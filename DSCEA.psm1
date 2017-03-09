@@ -1,4 +1,3 @@
-#[string]$location = Join-Path $env:ProgramFiles 'DSCEA'
 [string]$webstyle = @'
 <style>
 BODY{background-color:#0078D7; margin-left:50px; margin-right:auto;}
