@@ -27,7 +27,7 @@ CompanyName = 'Microsoft'
 Copyright = '(c) 2016 Microsoft. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'DSCEA is a scanning engine for processing Test-DSCConfiguration results'
+Description = 'DSCEA is a scanning engine for processing Test-DscConfiguration results'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '5.0'
