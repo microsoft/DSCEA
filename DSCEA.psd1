@@ -27,7 +27,7 @@ CompanyName = 'Microsoft'
 Copyright = '(c) 2016 Microsoft. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'DSCEA is a scanning engine for processing Test-DSCConfiguration results'
+Description = 'DSCEA is a scanning engine for processing Test-DscConfiguration results'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '5.0'
@@ -66,7 +66,7 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module
-FunctionsToExport = ('Get-DscEaPowerBiReport','Get-DscEaReport','New-DscEaSampleComputers','New-DscEaSampleConfigs','Start-DscEaScan')
+FunctionsToExport = ('Convert-DSCEAresultsToCSV','Get-DSCEAreport','Insert-DSCEACSVtoSQL','Start-DSCEAscan')
 
 # Cmdlets to export from this module
 CmdletsToExport = '*'
@@ -111,7 +111,7 @@ PrivateData = @{
 } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
-# HelpInfoURI = ''
+HelpInfoURI = 'https://microsoft.github.io/DSCEA'
 
 # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
 # DefaultCommandPrefix = ''
