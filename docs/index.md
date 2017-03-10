@@ -12,6 +12,7 @@ DSC Environment Analyzer (DSCEA) is a simple implementation of PowerShell Desire
 This solution is provided as a PowerShell module, and it includes a customizable reporting engine that can provide reports on overall compliance and details on any DSC resource found to be not in compliance in an environment.  Compliance scanning has been implemented utilizing multi-threading practices, and has capabilities for scale and throttling for large environments.
 
 DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](https://github.com/Microsoft/DSCEA)
+
 Contributions are welcomed and encouraged 
  
 ## Report Options
