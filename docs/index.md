@@ -13,7 +13,7 @@ This solution is provided as a PowerShell module, and it includes a customizable
 
 DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](https://github.com/Microsoft/DSCEA)
 
-Contributions are welcomed and encouraged 
+**Contributions are welcomed and encouraged**
  
 ## Report Options
 
