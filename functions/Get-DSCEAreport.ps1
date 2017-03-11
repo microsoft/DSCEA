@@ -73,8 +73,8 @@ This command returns non-compliant configuration file items detected, grouped by
     }
     if(-not (Test-Path 'C:\ProgramData\DSCEA\logo.png')) {
         $env:PSModulePath -split ';' | ForEach-Object {
-            if(Test-Path (Join-Path $_ 'DSCEA\resources\logo.png')) {
-                Copy-Item (Join-Path $_ 'DSCEA\resources\logo.png') 'C:\ProgramData\DSCEA\logo.png' -Force
+            if(Test-Path (Join-Path $_ 'DSCEA\1.0.0.0\resources\logo.png')) {
+                Copy-Item (Join-Path $_ 'DSCEA\1.0.0.0\resources\logo.png') 'C:\ProgramData\DSCEA\logo.png' -Force
             }
         }
     }
