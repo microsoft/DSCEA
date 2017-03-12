@@ -11,6 +11,11 @@ margin-bottom: 50px;
                    }
 }
 
+p.ImageTextHeaderFirst {
+    margin-bottom: -10px;
+    font-weight: bold;
+}
+
 p.ImageTextHeader {
     margin-top: 20px;
     margin-bottom: -10px;
