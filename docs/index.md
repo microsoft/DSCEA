@@ -15,11 +15,10 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
 <br><i>Contributions are welcomed and encouraged</i>
  
 ## Report Options
-**Are systems matching the desired configuration?**
+<p class="ImageTextHeader">Are systems matching the desired configuration?</p>
 [ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport_Large.png)
-  
-  
-**Show all non-compliant items that were detected**
+
+<p class="ImageTextHeader">Show all non-compliant items that were detected</p>
 [ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Large.png)
 
 ## Examples

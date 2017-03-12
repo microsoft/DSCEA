@@ -11,6 +11,11 @@ margin-bottom: 50px;
                    }
 }
 
+p.ImageTextHeader {
+    margin: 0 0 20px;
+    font-weight: bold;
+}
+
 @media (min-width: 501px) { 
 .btn-default {
     margin-top: -60px;
