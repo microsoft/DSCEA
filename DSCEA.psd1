@@ -94,7 +94,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('DesiredStateConfiguration', 'DSC')
+        Tags = @('DesiredStateConfiguration', 'DSC', 'test', 'testing', 'report', 'reporting', 'audit', 'auditing', 'config', 'configuration', 'security', 'lockdown', 'harden', 'hardening', 'Test-DscConfiguration')
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/Microsoft/DSCEA/blob/master/LICENSE'
