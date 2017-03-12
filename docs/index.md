@@ -16,9 +16,11 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
 **Contributions are welcomed and encouraged**
  
 ## Report Options
+**Are your systems matching your desired configuration?**
 
-HTML overall, detailed, plus Power BI
 [ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport.png)
+
+**Show all non-compliant items that were detected**
 
 [ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport.png)
 
