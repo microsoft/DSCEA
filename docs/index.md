@@ -18,11 +18,11 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
 ## Report Options
 **Are your systems matching your desired configuration?**
 
-[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport.png)
+[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport_Large.png)
 
 **Show all non-compliant items that were detected**
 
-[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport.png)
+[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Large.png)
 
 ## Examples
 
