@@ -19,6 +19,9 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
 
 HTML overall, detailed, plus Power BI
 
+![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport.png)
+![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport.png)
+
 ## Examples
 
 https://technet.microsoft.com/itpro/powershell/windows/cim/new-cimsession
