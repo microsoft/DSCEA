@@ -1,3 +1,5 @@
+#The function below was inspired by Chrissy LeMaire's post at https://blog.netnerds.net/2015/01/powershell-high-performance-techniques-for-importing-csv-to-sql-server/
+
 function Send-DSCEACSVtoSQL {
     param(
         [Parameter(Mandatory=$true)][string]$SQLserver,
