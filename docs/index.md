@@ -14,11 +14,14 @@ This solution is provided as a PowerShell module, and it includes a customizable
 DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](https://github.com/Microsoft/DSCEA)
 <br><i>Contributions are welcomed and encouraged</i>
  
-## Report Options
-<p class="ImageTextHeaderFirst">Example 1) Are systems matching the desired configuration?</p>
+## Report Examples
+<p class="ImageTextHeaderFirst">Are systems matching the desired configuration?</p>
 [ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport_Large.png)
 
-<p class="ImageTextHeader">Example 2) Show all non-compliant items that were detected</p>
+<p class="ImageTextHeader">Show all non-compliant items that were detected</p>
+[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Large.png)
+
+<p class="ImageTextHeader">Feeling creative? Display DSCEA scan results within Power BI</p>
 [ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Large.png)
 
 ## Examples
