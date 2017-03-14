@@ -814,7 +814,9 @@ pre {
 }
 
 video {
+    display: block;
     margin: 30px 0px;
+    border: 1px solid #c0c0c0;
 }
 
 
