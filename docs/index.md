@@ -34,28 +34,28 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
 PS C:\> Start-DSCEAscan -MofFile .\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3
 ```
 
-This command does abc
+This command executes a DSCEA scan against 3 remote systems, dsctest-1, dsctest-2 and dsctest-3 using a locally defined MOF file that exists in the current directory.  This MOF file specifies the settings to check for during the scan.  Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
 ### **Example 2: Scan multiple systems for compliance to settings defined within a localhost.mof file using the full file path**
 ```powershell
 PS C:\> Start-DSCEAscan -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3
 ```
 
-This command does def
+This command executes a DSCEA scan against 3 remote systems, dsctest-1, dsctest-2 and dsctest-3 using a locally defined MOF file that exists at "C:\Users\username\Documents\DSCEA".  This MOF file specifies the settings to check for during the scan.  Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
-### **Example 3: Scan multiple systems** (names provided in a text file as a carriage return style list) **for compliance to settings defined within a localhost.mof file located in your current directory**
+### **Example 3: Scan multiple systems using a carriage return style input file for compliance to settings defined within a localhost.mof file located in your current directory**
 ```powershell
 PS C:\> Start-DSCEAscan -MofFile .\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt
 ```
 
-This command does uvw
+This command executes a DSCEA scan against the systems listed within "C:\Users\username\Documents\DSCEA\computers.txt" using a locally defined MOF file that exists in the current directory.  This MOF file specifies the settings to check for during the scan.  Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
-### **Example 4: Scan multiple systems** (names provided in a text file as a carriage return style list) **for compliance to settings defined within a localhost.mof file using the full file path**
+### **Example 4: Scan multiple systems using a carriage return style input file for compliance to settings defined within a localhost.mof file using the full file path**
 ```powershell
-PS C:\> Start-DSCEAscan -MofFile C:\Users\ralph\Documents\DSCEA\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt
+PS C:\> Start-DSCEAscan -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt
 ```
 
-This command does xyz
+This command executes a DSCEA scan against the systems listed within "C:\Users\username\Documents\DSCEA\computers.txt" using a locally defined MOF file that exists at "C:\Users\username\Documents\DSCEA".  This MOF file specifies the settings to check for during the scan.  Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
 ## Solution Workflow
 
