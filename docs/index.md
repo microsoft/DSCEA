@@ -22,7 +22,7 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
 [ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Large.png)
 
 <p class="ImageTextHeader">Feeling creative? Display DSCEA scan results within Power BI</p>
-[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Large.png)
+<iframe class="tscplayer_inline" id="embeddedSmartPlayerInstance" src="HomePagePowerBIGIF_player.html?embedIFrameId=embeddedSmartPlayerInstance" scrolling="no" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 
 ## Examples
 
