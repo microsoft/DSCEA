@@ -30,7 +30,7 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
 ## Examples
 
 ### Example 1: Create a CIM session with default options
-```
+```powershell
 PS C:\> New-CimSession
 ```
 
@@ -38,7 +38,7 @@ This command creates a local CIM session with default options.
 If *ComputerName* is not specified, **New-CimSession** creates a DCOM session to the local computer.
 
 ### Example 2: Create a CIM session to a specific computer
-```
+```powershell
 PS C:\> New-CimSession -ComputerName "Server01"
 ```
 
@@ -46,7 +46,7 @@ This command creates a CIM session to the computer specified by *ComputerName*.
 By default, **New-CimSession** creates a WsMan session when *ComputerName* is specified.
 
 ### Example 3: Create a CIM session to multiple computers
-```
+```powershell
 PS C:\> New-CimSession -ComputerName "Server01,Server02,Server03"
 ```
 
