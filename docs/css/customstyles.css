@@ -812,10 +812,11 @@ pre {
 .video-js {
     margin: 30px 0px;
 }
-
+ /*
 video {
     margin: 30px 0px;
 }
+*/
 
 
 p.required, p.dataType {display: block; color: #c0c0c0; font-size: 80%; margin-left:4px;}
