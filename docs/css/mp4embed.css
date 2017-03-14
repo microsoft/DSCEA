@@ -5,8 +5,11 @@
 }
 
 .tscplayer_inline {
+	position:static;
+	margin: 30px;
 	width: 851px;
 	height: 480px;
+	z-index:auto;
 }
 
 .tscplayer_fullframe {
