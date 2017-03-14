@@ -29,28 +29,33 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
 
 ## Examples
 
-### Example 1: Create a CIM session with default options
+### Example 1: Scan multiple systems for compliance to settings defined within a localhost.mof file located in your current directory
 ```powershell
-PS C:\> New-CimSession
+PS C:\> Start-DSCEAscan -MofFile .\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3
 ```
 
-This command creates a local CIM session with default options.
-If *ComputerName* is not specified, **New-CimSession** creates a DCOM session to the local computer.
+This command does abc
 
-### Example 2: Create a CIM session to a specific computer
+### Example 2: Scan multiple systems for compliance to settings defined within a localhost.mof file using the full file path
 ```powershell
-PS C:\> New-CimSession -ComputerName "Server01"
+PS C:\> Start-DSCEAscan -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3
 ```
 
-This command creates a CIM session to the computer specified by *ComputerName*.
-By default, **New-CimSession** creates a WsMan session when *ComputerName* is specified.
+This command does def
 
-### Example 3: Create a CIM session to multiple computers
+### Example 3: Scan multiple systems (names provided in a text file as a carriage return style list) for compliance to settings defined within a localhost.mof file located in your current directory
 ```powershell
-PS C:\> New-CimSession -ComputerName "Server01,Server02,Server03"
+PS C:\> Start-DSCEAscan -MofFile .\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt
 ```
 
-This command creates a CIM session to each of the computers specified by *ComputerName*, in the comma separated list.
+This command does uvw
+
+### Example 4: Scan multiple systems (names provided in a text file as a carriage return style list) for compliance to settings defined within a localhost.mof file using the full file path
+```powershell
+PS C:\> Start-DSCEAscan -MofFile C:\Users\ralph\Documents\DSCEA\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt
+```
+
+This command does xyz
 
 ## Solution Workflow
 
