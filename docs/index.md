@@ -29,28 +29,28 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
 
 ## Examples
 
-### Example 1: Scan multiple systems for compliance to settings defined within a localhost.mof file located in your current directory
+### **Example 1: Scan multiple systems for compliance to settings defined within a localhost.mof file located in your current directory**
 ```powershell
 PS C:\> Start-DSCEAscan -MofFile .\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3
 ```
 
 This command does abc
 
-### Example 2: Scan multiple systems for compliance to settings defined within a localhost.mof file using the full file path
+### **Example 2: Scan multiple systems for compliance to settings defined within a localhost.mof file using the full file path**
 ```powershell
 PS C:\> Start-DSCEAscan -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3
 ```
 
 This command does def
 
-### Example 3: Scan multiple systems **(names provided in a text file as a carriage return style list)** for compliance to settings defined within a localhost.mof file located in your current directory
+### **Example 3: Scan multiple systems** (names provided in a text file as a carriage return style list) **for compliance to settings defined within a localhost.mof file located in your current directory**
 ```powershell
 PS C:\> Start-DSCEAscan -MofFile .\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt
 ```
 
 This command does uvw
 
-### Example 4: Scan multiple systems **(names provided in a text file as a carriage return style list)** for compliance to settings defined within a localhost.mof file using the full file path
+### **Example 4: Scan multiple systems** (names provided in a text file as a carriage return style list) **for compliance to settings defined within a localhost.mof file using the full file path**
 ```powershell
 PS C:\> Start-DSCEAscan -MofFile C:\Users\ralph\Documents\DSCEA\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt
 ```
