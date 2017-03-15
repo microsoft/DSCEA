@@ -19,7 +19,7 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 * DSCEA documentation (The site you are looking at right now)
     * DSCEA documentation is hosted in the same repo as the solution, inside the docs folder
     * Each page on this site has a contribute button located towards the top of the page that will bring you directly to the proper markdown file in the repo
-        * All documentation related pull requests should target the dev branch
+    * All documentation related pull requests should target the dev branch
 * Share your stories of how you have used DSCEA in your environment
     * [https://www.powershellgallery.com/packages/DSCEA/ContactOwners](https://www.powershellgallery.com/packages/DSCEA/ContactOwners)
 * Develop and share DSC configuration files that benefit from being paired with DSCEA
