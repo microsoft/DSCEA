@@ -27,6 +27,10 @@ entries:
     output: web
     folderitems:
 
+    - title: 1.0.0.1 Release notes
+      url: /mydoc_release_1001.html
+      output: web
+
     - title: 1.0.0.0 Release notes
       url: /mydoc_release_1000.html
       output: web
