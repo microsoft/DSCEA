@@ -9,7 +9,7 @@ folder: mydoc
 
 PowerShell Desired State Configuration is typically thought of as a management system that enables **deploying** configurations.  In normal use of DSC, all configuration modes start with an apply action, making it difficult to test the impact of pushing a change. New features were added to PowerShell starting with Version 5 that enable the ability to use DSC to audit systems for configuration compliance against a desired baseline.
 
-DSC Environment Analyzer (DSCEA) utilizes the DSC processing engine and DSC resources to look at and report on the existing configuration of machines in an environment.
+DSC Environment Analyzer (DSCEA) utilizes the DSC processing engine and DSC resources to audit and report on the existing configuration of machines in an environment.
 
 By using PowerShell Desired State Configuration at its core, DSCEA obtains some unique advantages.  Most notably, by defining the desired configuration state using DSC, an admin can benefit from using the same work to both scan for compliance, and then decide the speed at which to correct items that were found to be non-compliant.  Building an audit file in DSC can help ease remediations, because in some cases it can be as simple as applying the same MOF file that was used to scan the environment onto systems to correct drift and bring things into the desired state.
 
