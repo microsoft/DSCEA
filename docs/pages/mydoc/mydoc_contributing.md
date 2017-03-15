@@ -11,10 +11,15 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-dscea solution itself on github
+**Ways you can help contribute include:**
 
-dscea documentation, hosted in the dscea repo, point out each doc page has a contribute button that will take you right to github file for that web page and allow you to raise issue or submit pull requests
-
-examples use cases of how you have used dscea
-
-configs
+* Contribute to the DSCEA solution hosted on GitHub at [https://github.com/Microsoft/DSCEA](https://github.com/Microsoft/DSCEA) 
+    * Code updates, pull requests, issues and feature requests are all welcomed
+    * All code related pull requests should target the dev branch
+* DSCEA documentation (The site you are looking at right now)
+    * DSCEA documentation is hosted in the same repo as the solution, inside the docs folder
+    * Each page on this site has a contribute button located towards the top of the page that will bring you directly to the proper markdown file in the repo
+        * All documentation related pull requests should target the dev branch
+* Share your stories of how you have used DSCEA in your environment
+    * [https://www.powershellgallery.com/packages/DSCEA/ContactOwners](https://www.powershellgallery.com/packages/DSCEA/ContactOwners)
+* Develop and share DSC configuration files that benefit from being paired with DSCEA
