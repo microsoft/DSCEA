@@ -11,7 +11,7 @@ PowerShell Desired State Configuration is typically thought of as a management s
 
 DSC Environment Analyzer (DSCEA) utilizes the DSC processing engine and DSC resources to look at and report on the existing configuration of machines in an environment.
 
-By using PowerShell Desired State Configuration at its core, DSCEA obtains some unique advantages.  Most notably, an admin can use the same MOF file to both scan for compliance, and then decide which items they want to correct that were found to be non-compliant.  Building an audit file in DSC can help simplify remediations, because in some cases it can be as easy as applying the same MOF file that was used to scan the environment onto systems to correct drift and bring things into the desired state.
+By using PowerShell Desired State Configuration at its core, DSCEA obtains some unique advantages.  Most notably, by defining the desired configuration state using DSC, an admin can benefit from using the same work to both scan for compliance, and then decide the speed at which to correct items that were found to be non-compliant.  Building an audit file in DSC can help ease remediations, because in some cases it can be as simple as applying the same MOF file that was used to scan the environment onto systems to correct drift and bring things into the desired state.
 
 DSCEA was co-created by Ralph Kyttle and Keith Hitchcock.
 
