@@ -7,4 +7,4 @@ folder: mydoc
 
 ## Changelog
 
-* Version increase to 1.0.0.1 to fix issue with logo file copy due to a folder structure change introduced after registering with PowerShell gallery
+* Version increase to 1.0.0.1 to fix issue with logo file copy due to a folder structure change introduced after registering with PowerShell Gallery
