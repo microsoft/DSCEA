@@ -16,16 +16,16 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
  
 ## Report Examples
 DSCEA currently supports displaying scan result data in either Power BI or HTML
-**<p class="ImageTextHeaderFirst">Display DSCEA scan results within Power BI</p>**
+<p class="ImageTextHeaderFirst">Display DSCEA scan results within Power BI</p>
 <video class="tscplayer_inline" controls poster="https://rkyttle.github.io/DSCEA/mp4/HomePagePowerBIGIF_First_Frame.png" preload="none">
    <source src="https://rkyttle.github.io/DSCEA/mp4/HomePagePowerBIGIF.mp4" type="video/mp4">
    Your browser does not support the HTML video tag.
 </video>
 
-**<p class="ImageTextHeader">HTML Report - Are systems matching the desired configuration?</p>**
+<p class="ImageTextHeader">HTML Report - Are systems matching the desired configuration?</p>
 [ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport_Large.png)
 
-**<p class="ImageTextHeader">HTML Report - Show all non-compliant items that were detected</p>**
+<p class="ImageTextHeader">HTML Report - Show all non-compliant items that were detected</p>
 [ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Large.png)
 
 ## Examples
