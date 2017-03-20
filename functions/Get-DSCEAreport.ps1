@@ -68,14 +68,12 @@ This command returns non-compliant configuration file items detected, grouped by
 
         [String]$OutPath = '.'
     )
-    if(-not (Test-Path C:\ProgramData\DSCEA)) {
-        New-Item C:\ProgramData\DSCEA -type directory    
-    }
-    if(-not (Test-Path 'C:\ProgramData\DSCEA\logo.png')) {
-        $env:PSModulePath -split ';' | ForEach-Object {
-            if(Test-Path (Join-Path $_ 'DSCEA\1.0.0.1\resources\logo.png')) {
-                Copy-Item (Join-Path $_ 'DSCEA\1.0.0.1\resources\logo.png') 'C:\ProgramData\DSCEA\logo.png' -Force
+    $env:PSModulePath -split ';' | ForEach-Object {
+        if(Test-Path (Join-Path -Path $_ -ChildPath 'DSCEA')) {
+            if (!(Test-Path -Path 'C:\ProgramData\DSCEA')) {
+                New-Item 'C:\ProgramData\DSCEA' -Type Directory
             }
+            Copy-Item -Path (Get-ChildItem -Path $_ -Recurse -Filter 'logo.png').FullName -Destination 'C:\ProgramData\DSCEA\logo.png' -Force
         }
     }
     $results = Import-Clixml $InFile

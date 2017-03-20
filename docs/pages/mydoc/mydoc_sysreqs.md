@@ -7,7 +7,8 @@ folder: mydoc
 
 ## DSCEA Essentials
 
-* DSCEA currently supports only Windows Operating Systems (DSCEA depends on Test-DscConfiguration -ReferenceConfiguration)
+* DSCEA currently only supports Windows Operating Systems <br> 
+(DSCEA depends on Test-DscConfiguration -ReferenceConfiguration)
 * PowerShell version 5 or above must be installed on all systems that interact with the solution 
 * PowerShell Remoting and WinRM must be enabled 
 * All systems must be members of an Active Directory domain or CimSession configuration and usage is required 

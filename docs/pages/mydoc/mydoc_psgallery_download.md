@@ -7,12 +7,12 @@ folder: mydoc
 
 ## Download from PowerShell Gallery - Offline Install
 
+The DSCEA PowerShell module needs to be installed only on the server acting as the management system that will be used to connect to remote systems to evaluate their compliance.
+
 If the server acting as your management system does not have internet access, you can download the DSCEA module from the PowerShell Gallery using an internet connected system and copy the module files over to your management system.
 
-PowerShell Console Screenshots starting with Download-Module
+Details on downloading DSCEA from the PowerShell Gallery can be found at the link below:
 
-Copy files to C:\Program Files\WindowsPowerShell\Modules on the management system
+[https://www.powershellgallery.com/packages/DSCEA](https://www.powershellgallery.com/packages/DSCEA)
 
-Launch PowerShell on the management system
-
-End with Get-Command on DSCEA showing all the new functions
+Copy the module files to C:\Program Files\WindowsPowerShell\Modules or any other location defined in the PSModulePath variable on your management system.

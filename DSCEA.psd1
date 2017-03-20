@@ -18,7 +18,7 @@ ModuleVersion = '1.0.0.1'
 GUID = '2f4af4e9-785e-46b2-829b-b1c49d8d3fbf'
 
 # Author of this module
-Author = 'DSCEA Team'
+Author = 'Microsoft Corporation'
 
 # Company or vendor of this module
 CompanyName = 'Microsoft'

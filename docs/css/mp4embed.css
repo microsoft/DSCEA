@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+#tsc_player {
+   z-index: 9999;	
+}
+
+.tscplayer_inline {
+	width: 599px;
+	height: 337px;
+}
+
+.tscplayer_fullframe {
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	margin: 0px;
+	padding: 0px;
+	z-index: 9999;	
+}
+
+@media screen and (max-width: 851px) {
+    .tscplayer_inline {
+	width: 100%;
+    }
+}
