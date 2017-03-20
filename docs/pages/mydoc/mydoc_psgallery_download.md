@@ -15,4 +15,4 @@ Details on downloading DSCEA from the PowerShell Gallery can be found at the lin
 
 [https://www.powershellgallery.com/packages/DSCEA](https://www.powershellgallery.com/packages/DSCEA)
 
-To download the module, use the Save-Module function and copy the module files to C:\Program Files\WindowsPowerShell\Modules or any other location defined in the PSModulePath variable on the management system.
+Copy the module files to C:\Program Files\WindowsPowerShell\Modules or any other location defined in the PSModulePath variable on your management system.

@@ -15,4 +15,4 @@ Details on installing DSCEA direct from the PowerShell Gallery can be found at t
 
 **Install Screenshot**
 
-[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/TestDscConfiguration_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/TestDscConfiguration_Large.png)
+[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/InstallModule_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/InstallModule_Large.png)
