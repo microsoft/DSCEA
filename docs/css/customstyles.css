@@ -11,6 +11,17 @@ margin-bottom: 50px;
                    }
 }
 
+p.ImageTextHeaderFirst {
+    margin-bottom: -10px;
+    font-weight: bold;
+}
+
+p.ImageTextHeader {
+    margin-top: 20px;
+    margin-bottom: -10px;
+    font-weight: bold;
+}
+
 @media (min-width: 501px) { 
 .btn-default {
     margin-top: -60px;
@@ -620,7 +631,7 @@ a.fa.fa-envelope-o.mailto {
     font-weight: 600;
 }
 
-h3 {color: #ED1951; font-weight:normal; font-size:130%;}
+h3 {color: #000000; font-weight:normal; font-size:130%;}
 h4 {color: #808080; font-weight:normal; font-size:120%; font-style:italic;}
 
 .alert, .callout {
@@ -801,12 +812,11 @@ pre {
 .video-js {
     margin: 30px 0px;
 }
-
+ 
 video {
-    display: block;
-    margin: 30px 0px;
-    border: 1px solid #c0c0c0;
+    margin-top: 12px;
 }
+
 
 
 p.required, p.dataType {display: block; color: #c0c0c0; font-size: 80%; margin-left:4px;}
@@ -955,7 +965,7 @@ span.soft {
     padding:10px;
 }
 
-/* this part adds an icon after external links, using FontAwesome*/
+/* this part adds an icon after external links, using FontAwesome
 a[href^="http://"]:after, a[href^="https://"]:after {
     content: "\f08e";
     font-family: FontAwesome;
@@ -965,6 +975,7 @@ a[href^="http://"]:after, a[href^="https://"]:after {
     text-decoration: none;
     padding-left: 3px;
 }
+*/
 
 /* Strip the outbound icon when this class is present */
 a[href].noCrossRef::after,

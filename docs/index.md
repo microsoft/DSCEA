@@ -7,40 +7,43 @@ permalink: index.html
 
 ## Overview
 
-DSC Environment Analyzer (DSCEA) is a simple implementation of PowerShell Desired State Configuration that uses the declarative nature of DSC to scan Windows OS based systems in an environment against a defined reference MOF file and generate compliance reports as to whether systems match the desired configuration.
+**DSC Environment Analyzer (DSCEA)** is a simple implementation of PowerShell Desired State Configuration that uses the declarative nature of DSC to scan Windows OS based systems in an environment against a defined reference MOF file and generate compliance reports as to whether systems match the desired configuration.
 
 This solution is provided as a PowerShell module, and it includes a customizable reporting engine that can provide reports on overall compliance and details on any DSC resource found to be not in compliance in an environment.  Compliance scanning has been implemented utilizing multi-threading practices, and has capabilities for scale and throttling for large environments.
 
-DSCEA is an Open-Source Project, hosted at https://github.com/Microsoft/DSCEA
-Contributions are welcomed and encouraged 
+DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](https://github.com/Microsoft/DSCEA)
+<br><i>Contributions are welcomed and encouraged</i>
  
-## Report Options
+## Report Examples
+DSCEA currently supports displaying scan result data in either Power BI or HTML
 
-HTML overall, detailed, plus Power BI
+<p class="ImageTextHeaderFirst">Display DSCEA scan results within Power BI</p>
+[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/PowerBIHome_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/PowerBIHome_Large.png)
+
+<p class="ImageTextHeader">HTML Report - Are systems matching the desired configuration?</p>
+[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/OverallComplianceReport_Large.png)
+
+<p class="ImageTextHeader">HTML Report - Show all non-compliant items that were detected</p>
+[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/DetailedComplianceReport_Large.png)
 
 ## Examples
 
-https://technet.microsoft.com/itpro/powershell/windows/cim/new-cimsession
+### **Example 1: Scan multiple systems for compliance to settings defined within a localhost.mof file located in your current directory**
+<pre><code>PS C:\> Start-DSCEAscan -MofFile .\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3</code></pre>
 
-Example 1: Create a CIM session with default options
-PS C:\> New-CimSession
-Copy
+This command executes a DSCEA scan against 3 remote systems, dsctest-1, dsctest-2 and dsctest-3 using a locally defined MOF file that exists in the current directory.  This MOF file specifies the settings to check for during the scan.  Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
-This command creates a local CIM session with default options. If ComputerName is not specified, New-CimSession creates a DCOM session to the local computer.
+### **Example 2: Scan multiple systems for compliance to settings defined within a localhost.mof file using the full file path**
+<pre><code>PS C:\> Start-DSCEAscan -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3</code></pre>
 
-Example 2: Create a CIM session to a specific computer
-PS C:\> New-CimSession -ComputerName "Server01"
-Copy
+This command executes a DSCEA scan against 3 remote systems, dsctest-1, dsctest-2 and dsctest-3 using a locally defined MOF file that exists at "C:\Users\username\Documents\DSCEA".  This MOF file specifies the settings to check for during the scan.  Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
-This command creates a CIM session to the computer specified by ComputerName. By default, New-CimSession creates a WsMan session when ComputerName is specified.
+### **Example 3: Scan multiple systems using a carriage return style input file for compliance to settings defined within a localhost.mof file located in your current directory**
+<pre><code>PS C:\> Start-DSCEAscan -MofFile .\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt</code></pre>
 
-Example 3: Create a CIM session to multiple computers
-PS C:\> New-CimSession -ComputerName "Server01,Server02,Server03"
-Copy
+This command executes a DSCEA scan against the systems listed within "C:\Users\username\Documents\DSCEA\computers.txt" using a locally defined MOF file that exists in the current directory.  This MOF file specifies the settings to check for during the scan.  Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
-This command creates a CIM session to each of the computers specified by ComputerName, in the comma separated list.
+### **Example 4: Scan multiple systems using a carriage return style input file for compliance to settings defined within a localhost.mof file using the full file path**
+<pre><code>PS C:\> Start-DSCEAscan -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt</code></pre>
 
-
-## Solution Workflow
-
-Visio - multiple panes, showing the steps
+This command executes a DSCEA scan against the systems listed within "C:\Users\username\Documents\DSCEA\computers.txt" using a locally defined MOF file that exists at "C:\Users\username\Documents\DSCEA".  This MOF file specifies the settings to check for during the scan.  Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.

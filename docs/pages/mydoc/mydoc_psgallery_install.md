@@ -7,8 +7,12 @@ folder: mydoc
 
 ## Install from PowerShell Gallery
 
-The DSCEA PowerShell module needs to be installed only on the server acting as your management system that will be used to remotely connect to systems to evaluate their compliance
+The DSCEA PowerShell module needs to be installed only on the server acting as the management system that will be used to connect to remote systems to evaluate their compliance.
 
-PowerShell Console Screenshots starting with Install-Module
+Details on installing DSCEA direct from the PowerShell Gallery can be found at the link below:
 
-End with Get-Command on DSCEA showing all the new functions
+[https://www.powershellgallery.com/packages/DSCEA](https://www.powershellgallery.com/packages/DSCEA)
+
+**Install Screenshot**
+
+[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/InstallModule_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/InstallModule_Large.png)
