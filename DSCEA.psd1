@@ -12,13 +12,13 @@
 RootModule = 'DSCEA.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.0.0'
+ModuleVersion = '1.0.0.1'
 
 # ID used to uniquely identify this module
 GUID = '2f4af4e9-785e-46b2-829b-b1c49d8d3fbf'
 
 # Author of this module
-Author = 'DSCEA Team'
+Author = 'Microsoft Corporation'
 
 # Company or vendor of this module
 CompanyName = 'Microsoft'
@@ -27,7 +27,9 @@ CompanyName = 'Microsoft'
 Copyright = '(c) 2016 Microsoft. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'DSCEA is a scanning engine for processing Test-DSCConfiguration results'
+Description = 'DSCEA is a scanning engine for processing Test-DSCConfiguration results.
+Visit https://microsoft.github.io/DSCEA for more information.
+'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '5.0'
@@ -92,7 +94,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('DesiredStateConfiguration', 'DSC')
+        Tags = @('DesiredStateConfiguration', 'DSC', 'test', 'testing', 'report', 'reporting', 'audit', 'auditing', 'config', 'configuration', 'security', 'lockdown', 'harden', 'hardening', 'Test-DscConfiguration')
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/Microsoft/DSCEA/blob/master/LICENSE'

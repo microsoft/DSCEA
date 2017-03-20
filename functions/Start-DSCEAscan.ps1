@@ -164,7 +164,7 @@ param
         $runlist =  ($psjobresults | where-object -Property Major -ge 5).PSComputername
         $versionerrorlist =  ($psjobresults | where-object -Property Major -lt 5).PSComputername
 
-        $PSVersionErrorsFile = Join-Path -Path $LogsPath -Childpath ('PSVersionErrors.{0}.xml' -f (Get-Date -Format 'yyyyMMdd-HH:mm:ss'))
+        $PSVersionErrorsFile = Join-Path -Path $LogsPath -Childpath ('PSVersionErrors.{0}.xml' -f (Get-Date -Format 'yyyyMMdd-HHmm-ss'))
     
         Write-Verbose "Connectivity testing complete"
         if ($versionerrorlist){
