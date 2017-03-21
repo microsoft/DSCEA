@@ -5,26 +5,12 @@ permalink: mydoc_report_powerbi.html
 folder: mydoc
 ---
 
-## Overview
+## DSCEA Reporting with PowerBI
 
-This site provides documentation, training, and other notes for the Jekyll Documentation theme. There's a lot of information about how to do a variety of things here, and it's not all unique to this theme. But by and large, understanding how to do things in Jekyll depends on how your theme is coded. As a result, these additional details are provided.
+DSCEA includes a function called Convert-DSCEAresultsToCSV.
 
-The instructions here are geared towards technical writers working on documentation. You may have a team of one or more technical writers working on documentation for multiple projects. You can use this same theme to author all of your documentation for each of your products. The theme is built to accommodate documentation for multiple products on the same site.
+This function can be executed after a successful run of Start-DSCEAscan and its purpose is to take the XML output that is generated from Start-DSCEAscan and convert it to a CSV file that can be easily used with Power BI.  This can be done with or without an Office 365 subscription, as [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/) is a free option available for creating reports that does not require Office 365.
 
-## Survey of features
+Convert-DSCEAresultsToCSV searches your scan results file path for the most recently created XML file and it takes this file and outputs a file called output.csv
 
-Some of the more prominent features of this theme include the following:
-
-* Bootstrap framework
-* [Navgoco multi-level sidebar](http://www.komposta.net/article/navgoco) for table of contents
-* Ability to specify different sidebars for different products
-* Top navigation bar with drop-down menus
-* Notes, tips, and warning information notes
-* Tags for alternative navigation
-* Advanced landing page layouts from the [Modern Business theme](http://startbootstrap.com/template-overviews/modern-business/).
-
-## Getting started
-
-To get started, see [Getting Started][index].
-
-{% include links.html %}
+Download [DSCEA.pbix](https://raw.githubusercontent.com/Microsoft/DSCEA/master/resources/DSCEA.pbix) to view a demo report, and refresh it with your own CSV data once you have completed a scan and run Convert-DSCEAresultsToCSV. 
