@@ -14,6 +14,7 @@ folder: mydoc
 * Decide which systems you would like to scan, and prepare to either enter system names on the command line or create a text file containing the machine names
 * If you would like to test the compliance of the management system you are executing the scan from, you can use the system name localhost in either your command line or computers text file
 
-**Assumptions**
+## Assumptions
+
 * DNS resolution is working with either system short name or FQDN
 * Any duplicate system short names are made unique by FQDN 
