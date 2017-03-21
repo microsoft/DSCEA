@@ -29,4 +29,4 @@ The Test-DscConfiguration cmdlet provides us with some great information, and it
 
 Using the information returned from Test-DscConfiguration, we can do some really interesting things related to reporting on the configuration of systems in an environment.
 
-Security baseline scanning, operational system checks such as verifying the setting of a particular registry key across all systems in an environment, application level adherence to desired configurations are just a few examples of how DSCEA can make an impact in your environment. 
+Security baseline scanning, operational system checks such as verifying the setting of a particular registry key across all systems in an environment and application level adherence to desired configurations are just a few examples of how DSCEA can make an impact in your environment. 
