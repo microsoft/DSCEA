@@ -12,7 +12,7 @@
 RootModule = 'DSCEA.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.0.1'
+ModuleVersion = '1.1.0.0'
 
 # ID used to uniquely identify this module
 GUID = '2f4af4e9-785e-46b2-829b-b1c49d8d3fbf'
