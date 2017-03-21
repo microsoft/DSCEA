@@ -16,7 +16,7 @@ The computer name here will cause the report to display all items (true/false) p
 Switch parameter indicating that the report generated will display true/false per computer in regards to the entire configuration file
 
 .PARAMETER Detailed
-Switch parameter indicating that the report generated will display non-compliant configuration file items detected, grouped by computer
+Switch parameter indicating that the report generated will display all non-compliant configuration file items detected, grouped by computer
 
 .LINK
 https://microsoft.github.io/DSCEA
