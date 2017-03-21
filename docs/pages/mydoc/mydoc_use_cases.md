@@ -14,4 +14,4 @@ DSCEA's primary use case is to verify that your systems are actually configured 
 Real world examples of how DSCEA can be used include (Add links to MSFT blog posts):
 
 * Use DSCEA to verify a single setting, for example if a registry key is set appropriately across your entire environment
-* Scan the systems in your environemnt against all of the items that make up your organization's security baseline
+* Scan the systems in your environment against all of the items that make up your organization's security baseline

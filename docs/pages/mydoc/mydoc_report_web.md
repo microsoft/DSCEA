@@ -5,26 +5,28 @@ permalink: mydoc_report_web.html
 folder: mydoc
 ---
 
-## Overview
+## HTML Report Generation Examples
 
-This site provides documentation, training, and other notes for the Jekyll Documentation theme. There's a lot of information about how to do a variety of things here, and it's not all unique to this theme. But by and large, understanding how to do things in Jekyll depends on how your theme is coded. As a result, these additional details are provided.
+### **Example 1: Generate HTML Report based on scan results - Overall System Compliance**
+<pre><code>PS C:\Users\username\Documents\DSCEA> Get-DSCEAreport -Overall</code></pre>
 
-The instructions here are geared towards technical writers working on documentation. You may have a team of one or more technical writers working on documentation for multiple projects. You can use this same theme to author all of your documentation for each of your products. The theme is built to accommodate documentation for multiple products on the same site.
+This command is executed from a directory that contains DSCEA scan result XML files.  It generates a report of overall system compliance, and will mark a system as non-compliant if it does not fully match the desired configuration.
 
-## Survey of features
+### **Example 2: Generate HTML Report based on scan results - Show all non-compliant items detected**
+<pre><code>PS C:\Users\username\Documents\DSCEA> Get-DSCEAreport -Detailed</code></pre>
 
-Some of the more prominent features of this theme include the following:
+This command is executed from a directory that contains DSCEA scan result XML files.  It generates a report containing a list of all items that were found to be non-compliant.  If all systems that are scanned are found to be compliant, this report will show no results.
 
-* Bootstrap framework
-* [Navgoco multi-level sidebar](http://www.komposta.net/article/navgoco) for table of contents
-* Ability to specify different sidebars for different products
-* Top navigation bar with drop-down menus
-* Notes, tips, and warning information notes
-* Tags for alternative navigation
-* Advanced landing page layouts from the [Modern Business theme](http://startbootstrap.com/template-overviews/modern-business/).
+### **Example 3: Generate HTML Report based on scan results - Show the compliance state of a single item across all systems that were scanned**
+<pre><code>PS C:\Users\username\Documents\DSCEA> Get-DSCEAreport -ItemName MicrosoftAntiMalwareService</code></pre>
 
-## Getting started
+This command is executed from a directory that contains DSCEA scan result XML files.  It generates a report containing the compliance state for the Microsoft AntiMalware Service across all systems that were scanned.  The item name specified must match one of the resource names that was defined within the MOF file that was used to perform the scan.
 
-To get started, see [Getting Started][index].
+### **Example 4: Generate HTML Report based on scan results - Show the compliance state of all items for a single system**
+<pre><code>PS C:\Users\username\Documents\DSCEA> Get-DSCEAreport -ComputerName dsctest-1</code></pre>
 
-{% include links.html %}
+This command is executed from a directory that contains DSCEA scan result XML files.  It generates a report containing the compliance state for all items that were scanned on system dsctest-1.
+
+In addition, Get-DSCEAreport supports the **-InFile** parameter, which can be used to specify the full file path of the results XML file to be used for report generation.  In the previous examples of Get-DSCEAreport, the XML file used is the most recent XML file detected within the current directory.
+
+Get-DSCEAreport also supports the **-OutPath** parameter, which can be used to specify the path to store the generated HTML files.  This path must point to a pre-existing folder.

@@ -23,10 +23,10 @@ DSCEA uses the Test-DscConfiguration cmdlet and its new ability introduced in Po
 
 **Example output from Test-DscConfiguration**
 
-[ ![](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/TestDscConfiguration_Small.png) ](https://github.com/rkyttle/DSCEA/raw/dev/docs/images/TestDscConfiguration_Large.png)
+[ ![](https://raw.githubusercontent.com/Microsoft/DSCEA/master/docs/images/TestDscConfiguration_Small.png) ](https://raw.githubusercontent.com/Microsoft/DSCEA/master/docs/images/TestDscConfiguration_Large.png)
 
 The Test-DscConfiguration cmdlet provides us with some great information, and it acts as the core of the DSCEA module. 
 
 Using the information returned from Test-DscConfiguration, we can do some really interesting things related to reporting on the configuration of systems in an environment.
 
-Security baseline scanning, operational system checks such as verifying the setting of a particular registry key across all systems in an environment, application level adherence to desired configurations are just a few examples of how DSCEA can make an impact in your environment. 
+Security baseline scanning, operational system checks such as verifying the setting of a particular registry key across all systems in an environment and application level adherence to desired configurations are just a few examples of how DSCEA can make an impact in your environment. 
