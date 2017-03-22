@@ -1,13 +1,13 @@
 function Start-DSCEAscan {
 <#   
 .SYNOPSIS   
-Will run Test-DscConfiguration -ReferenceConfiguration against the remote systems supplied and saves the results to a XML file
+Will run Test-DscConfiguration -ReferenceConfiguration using the provided MOF file against the remote systems supplied and saves the scan results to a XML file
 
 .DESCRIPTION 
-Run this function after you have defined the remote systems to scan and have created a localhost.MOF file that defines the settings you want to check against
+Run this function after you have defined the remote systems to scan and have created a MOF file that defines the settings you want to check against
 
 .PARAMETER MofFile
-The file name (full file path) to the MOF file you are looking to use with DSCEA to perform a scan.  If no value is provided, Start-DSCEAscan will look into the current directory for a file name localhost.mof
+The file name (full file path) to the MOF file you are looking to use with DSCEA to perform a scan.  If no value is provided, Start-DSCEAscan will look into the current directory for a file named localhost.mof
 
 .PARAMETER ComputerName
 Comma seperated list of computer names that you want to scan
@@ -16,10 +16,10 @@ Comma seperated list of computer names that you want to scan
 The file name (full file path) to a text file that contains a list of computers you want to scan.  Either use the ComputerName paramter or InputFile, DSCEA does not currently support using both.
 
 .PARAMETER CimSession
-Provide DSCEA with a CimSession object to perform compliance scans against remote systems that are either not memebers of the same domain as the management system or require other credentials
+Provide DSCEA with a CimSession object to perform compliance scans against remote systems that are either not members of the same domain as the management system, are workgroup systems or require other credentials
 
 .PARAMETER ResultsFile
-The file name for the DSCEA scan results XML file.  If no value is provided, a time based name will be auto-generated.
+The file name for the DSCEA scan results XML file.  If no value is provided, a time based file name will be auto-generated.
 
 .PARAMETER OutputPath
 The full file path for the DSCEA scan results XML file.  The defined path must already exist. If no value is provided, the result XML file will be saved to the current directory.
