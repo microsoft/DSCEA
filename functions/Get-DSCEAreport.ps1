@@ -4,7 +4,7 @@ function Get-DSCEAreport {
 Generates a HTML based report after Start-DSCEAscan has been run
 
 .DESCRIPTION 
-Used to create viewable reports after Start-DSCEAscan has created a results.xml file which will be parsed.  Only one parameter from the list below can be used at one time. 
+Used to create viewable reports after Start-DSCEAscan has created a results.xml file which will be parsed. 
 
 .PARAMETER ItemName
 Switch parameter - This is the item name from the configuration file, used to generate a report of every machine's compliance against that item
