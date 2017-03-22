@@ -16,7 +16,6 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
  
 ## Report Examples
 DSCEA currently supports displaying scan result data in either Power BI or HTML
-
 <p class="ImageTextHeaderFirst">Display DSCEA scan results within Power BI</p>
 [ ![](https://raw.githubusercontent.com/Microsoft/DSCEA/master/docs/images/PowerBIHome_Small.png) ](https://raw.githubusercontent.com/Microsoft/DSCEA/master/docs/images/PowerBIHome_Large.png)
 
@@ -25,6 +24,7 @@ DSCEA currently supports displaying scan result data in either Power BI or HTML
 
 <p class="ImageTextHeader">HTML Report - Show all non-compliant items that were detected</p>
 [ ![](https://raw.githubusercontent.com/Microsoft/DSCEA/master/docs/images/DetailedComplianceReport_Small.png) ](https://raw.githubusercontent.com/Microsoft/DSCEA/master/docs/images/DetailedComplianceReport_Large.png)
+
 
 ## Examples
 
@@ -81,12 +81,14 @@ This command is executed from a directory that contains DSCEA scan result XML fi
 
 This command is executed from a directory that contains DSCEA scan result XML files.  It generates a report containing a list of all items that were found to be non-compliant.  If all systems that are scanned are found to be compliant, this report will show no results.
 
-### **Example 8: Generate HTML Report based on scan results - Show the compliance state of a single item across all systems that were scanned**
+### **Example 9: Generate HTML Report based on scan results - Show the compliance state of a single item across all systems that were scanned**
+
 <pre><code>PS C:\Users\username\Documents\DSCEA> Get-DSCEAreport -ItemName MicrosoftAntiMalwareService</code></pre>
 
 This command is executed from a directory that contains DSCEA scan result XML files.  It generates a report containing the compliance state for the Microsoft AntiMalware Service across all systems that were scanned.  The item name specified must match one of the resource names that was defined within the MOF file that was used to perform the scan.
 
-### **Example 9: Generate HTML Report based on scan results - Show the compliance state of all items for a single system**
+### **Example 10: Generate HTML Report based on scan results - Show the compliance state of all items for a single system**
+
 <pre><code>PS C:\Users\username\Documents\DSCEA> Get-DSCEAreport -ComputerName dsctest-1</code></pre>
 
 This command is executed from a directory that contains DSCEA scan result XML files.  It generates a report containing the compliance state for all items that were scanned on system dsctest-1.

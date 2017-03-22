@@ -1,18 +1,91 @@
 function Start-DSCEAscan {
 <#   
 .SYNOPSIS   
-Will run Test-DscConfiguration -ReferenceConfiguration against the remote systems supplied and saves the results to a XML file
+Will run Test-DscConfiguration -ReferenceConfiguration using the provided MOF file against the remote systems supplied and saves the scan results to a XML file
 
 .DESCRIPTION 
-Run this function after you have defined the remote systems to scan and have created a localhost.MOF file that defines the settings you want to check against
+Run this function after you have defined the remote systems to scan and have created a MOF file that defines the settings you want to check against
 
-.NOTES   
+.PARAMETER MofFile
+The file name (full file path) to the MOF file you are looking to use with DSCEA to perform a scan.  If no value is provided, Start-DSCEAscan will look into the current directory for a file named localhost.mof
+
+.PARAMETER ComputerName
+Comma seperated list of computer names that you want to scan
+
+.PARAMETER InputFile
+The file name (full file path) to a text file that contains a list of computers you want to scan.  Either use the ComputerName paramter or InputFile, DSCEA does not currently support using both.
+
+.PARAMETER CimSession
+Provide DSCEA with a CimSession object to perform compliance scans against remote systems that are either not members of the same domain as the management system, are workgroup systems or require other credentials
+
+.PARAMETER ResultsFile
+The file name for the DSCEA scan results XML file.  If no value is provided, a time based file name will be auto-generated.
+
+.PARAMETER OutputPath
+The full file path for the DSCEA scan results XML file.  The defined path must already exist. If no value is provided, the result XML file will be saved to the current directory.
+
+.PARAMETER LogsPath
+The full file path for the any DSCEA scna log files.  The defined path must already exist. If no value is provided, log files will be saved to the current directory.
+
+.PARAMETER JobTimeout
+Individual system timeout (seconds) If no value is provided, the default value of 600 seconds will be used.
+
+.PARAMETER ScanTimeout
+Total DSCEA scan timeout (seconds)  If no value is provided, the default value of 3600 seconds will be used.
+
+.PARAMETER Force
+The force parameter attempts to close any running DSC related processes on systems being scanned before a scan begins to avoid LCM conflicts.  Force is not enabled by default.
 
 .LINK
 https://microsoft.github.io/DSCEA
 
 .EXAMPLE
-. Start-DscEaScan
+Start-DSCEAscan -MofFile .\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3
+
+Description
+-----------
+This command executes a DSCEA scan against 3 remote systems, dsctest-1, dsctest-2 and dsctest-3 using a locally defined MOF file that exists in the current directory. This MOF file specifies the settings to check for during the scan. Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
+
+.EXAMPLE
+Start-DSCEAscan -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3
+
+Description
+-----------
+This command executes a DSCEA scan against 3 remote systems, dsctest-1, dsctest-2 and dsctest-3 using a locally defined MOF file that exists at “C:\Users\username\Documents\DSCEA”. This MOF file specifies the settings to check for during the scan. Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
+
+.EXAMPLE
+Start-DSCEAscan -MofFile .\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt
+
+Description
+-----------
+This command executes a DSCEA scan against the systems listed within “C:\Users\username\Documents\DSCEA\computers.txt” using a locally defined MOF file that exists in the current directory. This MOF file specifies the settings to check for during the scan. Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
+
+.EXAMPLE
+Start-DSCEAscan -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt
+
+Description
+-----------
+This command executes a DSCEA scan against the systems listed within “C:\Users\username\Documents\DSCEA\computers.txt” using a locally defined MOF file that exists at “C:\Users\username\Documents\DSCEA”. This MOF file specifies the settings to check for during the scan. Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
+
+.EXAMPLE
+Start-DSCEAscan -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -ComputerName dsctest-1, dsctest-2, dsctest-3 -OutputPath C:\Temp\DSCEA\Output -ResultsFile "results.xml" -LogsPath C:\Temp\DSCEA\Logs -JobTimeout 10 -ScanTimeout 60 -Force -Verbose
+
+Description
+-----------
+This command executes a DSCEA scan against 3 remote systems, dsctest-1, dsctest-2 and dsctest-3 using a locally defined MOF file that exists at “C:\Users\username\Documents\DSCEA”. This MOF file specifies the settings to check for during the scan. Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
+This example specifies custom values for -OutputPath and -LogsPath, which must be directories that are pre-existing to store results and logs from the scan. This scan also specifies custom values for -ResultsFile to provide the file name of the scan results file, -JobTimeout and -ScanTimeout which provide new timeout values for individual system timeouts and the overall scan timeout, a -Force option which attempts to close any running DSC related processes on systems being scanned before a scan begins to avoid LCM conflicts and -Verbose, which will provide full verbose output of the scan process.
+
+.EXAMPLE
+$UserName = 'LocalUser'
+$Password = ConvertTo-SecureString -String "P@ssw0rd" -AsPlainText -Force
+$Servers = "dsctest-4,dsctest-5,dsctest-6"
+$Cred =  New-Object System.Management.Automation.PsCredential -ArgumentList $UserName, $Password
+$Sessions = New-CimSession -Authentication Negotiate -ComputerName $Servers -Credential $Cred
+Start-DscEaScan -CimSession $Sessions -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -Verbose
+
+Description
+-----------
+This command utilizes New-CimSession and executes a DSCEA scan against 3 remote non-domain systems, dsctest-4, dsctest-5 and dsctest-6 using a locally defined MOF file that exists at “C:\Users\username\Documents\DSCEA”. This MOF file specifies the settings to check for during the scan. Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 #>
 [CmdletBinding()]
 param
@@ -26,6 +99,7 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$MofFile = 'localhost.mof',
 
+        [parameter(Mandatory=$true,ParameterSetName='ComputerFile')]
         [string]$InputFile,
 
         [ValidateNotNullOrEmpty()]
@@ -39,8 +113,10 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$ResultsFile = "results.$(Get-Date -Format 'yyyyMMdd-HHmm-ss').xml",
 
+        [parameter(Mandatory=$true,ParameterSetName='ComputerNames')]
         [string[]]$ComputerName,
 
+        [parameter(Mandatory=$true,ParameterSetName='CimSession')]
         [Microsoft.Management.Infrastructure.CimSession[]]$CimSession
     )
 
