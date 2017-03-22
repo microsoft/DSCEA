@@ -1,22 +1,22 @@
 function Get-DSCEAreport {
 <#   
 .SYNOPSIS   
-Generate a HTML based report after Start-DSCEAscan has been run
+Generates a HTML based report after Start-DSCEAscan has been run
 
 .DESCRIPTION 
-Used to create viewable reports after Start-DSCEAscan has created a results.xml file which will be parsed 
+Used to create viewable reports after Start-DSCEAscan has created a results.xml file which will be parsed.  Only one parameter from the list below can be used at one time. 
 
 .PARAMETER ItemName
-This is the item name from the configuration file, used to generate a report of every machine's compliance against that item
+Switch parameter - This is the item name from the configuration file, used to generate a report of every machine's compliance against that item
 
 .PARAMETER ComputerName
-The computer name here will cause the report to display all items (true/false) pertaining to ComputerName
+Switch parameter - Supplying a computer name will cause the report to display all items (true/false) pertaining to ComputerName
 
 .PARAMETER Overall
-Switch parameter indicating that the report generated will display true/false per computer in regards to the entire configuration file
+Switch parameter - Indicating that the report generated will display all up true/false per computer in regards to compliance against the entire configuration file
 
 .PARAMETER Detailed
-Switch parameter indicating that the report generated will display all non-compliant configuration file items detected, grouped by computer
+Switch parameter - Indicating that the report generated will display all non-compliant configuration file items detected, grouped by computer
 
 .LINK
 https://microsoft.github.io/DSCEA
@@ -40,7 +40,7 @@ Get-DSCEAreport -Overall
 
 Description
 -----------
-This command returns true/false per machine if they comply with the entire configuration file
+This command returns true/false per machine regarding whether they comply with the entire configuration file
 
 .EXAMPLE
 Get-DSCEAreport -Detailed
