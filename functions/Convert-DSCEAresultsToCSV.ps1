@@ -10,7 +10,7 @@ Used to convert the raw XML output from a DSCEA scan to a more consumable format
 The file name (full file path) of the XML file you would like to convert to CSV.  If one is not provided, Convert-DSCEAresultsToCSV looks to the current directory for the most recently created XML file.
 
 .PARAMETER OutFile
-The new file name (full file path) of the output CSV file.  If one is not provided, Convert-DSCEAresultsToCSV will create output.csv in the current directory.
+The new file name (full file path) of the output CSV file.  The file path must include a pre-existing folder.  If one is not provided, Convert-DSCEAresultsToCSV will create output.csv in the current directory.
 
 .LINK
 https://microsoft.github.io/DSCEA
