@@ -16,7 +16,6 @@ DSCEA is an Open-Source Project, hosted at [https://github.com/Microsoft/DSCEA](
  
 ## Report Examples
 DSCEA currently supports displaying scan result data in either Power BI or HTML
-
 <p class="ImageTextHeaderFirst">Display DSCEA scan results within Power BI</p>
 [ ![](https://raw.githubusercontent.com/Microsoft/DSCEA/master/docs/images/PowerBIHome_Small.png) ](https://raw.githubusercontent.com/Microsoft/DSCEA/master/docs/images/PowerBIHome_Large.png)
 
@@ -25,6 +24,7 @@ DSCEA currently supports displaying scan result data in either Power BI or HTML
 
 <p class="ImageTextHeader">HTML Report - Show all non-compliant items that were detected</p>
 [ ![](https://raw.githubusercontent.com/Microsoft/DSCEA/master/docs/images/DetailedComplianceReport_Small.png) ](https://raw.githubusercontent.com/Microsoft/DSCEA/master/docs/images/DetailedComplianceReport_Large.png)
+
 
 ## Examples
 
@@ -40,6 +40,7 @@ This command executes a DSCEA scan against 3 remote systems, dsctest-1, dsctest-
 
 ### **Example 3: Scan multiple systems using a carriage return style input file for compliance to settings defined within a localhost.mof file located in your current directory**
 <pre><code>PS C:\> Start-DSCEAscan -MofFile .\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt</code></pre>
+
 This command executes a DSCEA scan against the systems listed within "C:\Users\username\Documents\DSCEA\computers.txt" using a locally defined MOF file that exists in the current directory.  This MOF file specifies the settings to check for during the scan.  Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
 ### **Example 4: Scan multiple systems using a carriage return style input file for compliance to settings defined within a localhost.mof file using the full file path**
