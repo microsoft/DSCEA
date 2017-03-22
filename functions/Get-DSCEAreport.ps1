@@ -18,6 +18,12 @@ Switch parameter - Indicating that the report generated will display all up true
 .PARAMETER Detailed
 Switch parameter - Indicating that the report generated will display all non-compliant configuration file items detected, grouped by computer
 
+.PARAMETER InFile
+The file name (full file path) of the XML file you would like to convert.  If one is not provided, Get-DSCEAreport looks to the current directory for the most recently created XML file.
+
+.PARAMETER OutPath
+The full file path to use as a location to store HTML reports.  The file path must be a pre-existing folder.  If one is not provided, Get-DSCEAreport will create the HTML file in the current directory.
+
 .LINK
 https://microsoft.github.io/DSCEA
 
