@@ -40,7 +40,6 @@ This command executes a DSCEA scan against 3 remote systems, dsctest-1, dsctest-
 
 ### **Example 3: Scan multiple systems using a carriage return style input file for compliance to settings defined within a localhost.mof file located in your current directory**
 <pre><code>PS C:\> Start-DSCEAscan -MofFile .\localhost.mof -InputFile C:\Users\username\Documents\DSCEA\computers.txt</code></pre>
-
 This command executes a DSCEA scan against the systems listed within "C:\Users\username\Documents\DSCEA\computers.txt" using a locally defined MOF file that exists in the current directory.  This MOF file specifies the settings to check for during the scan.  Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
 ### **Example 4: Scan multiple systems using a carriage return style input file for compliance to settings defined within a localhost.mof file using the full file path**
@@ -82,11 +81,13 @@ This command is executed from a directory that contains DSCEA scan result XML fi
 This command is executed from a directory that contains DSCEA scan result XML files.  It generates a report containing a list of all items that were found to be non-compliant.  If all systems that are scanned are found to be compliant, this report will show no results.
 
 ### **Example 9: Generate HTML Report based on scan results - Show the compliance state of a single item across all systems that were scanned**
+
 <pre><code>PS C:\Users\username\Documents\DSCEA> Get-DSCEAreport -ItemName MicrosoftAntiMalwareService</code></pre>
 
 This command is executed from a directory that contains DSCEA scan result XML files.  It generates a report containing the compliance state for the Microsoft AntiMalware Service across all systems that were scanned.  The item name specified must match one of the resource names that was defined within the MOF file that was used to perform the scan.
 
 ### **Example 10: Generate HTML Report based on scan results - Show the compliance state of all items for a single system**
+
 <pre><code>PS C:\Users\username\Documents\DSCEA> Get-DSCEAreport -ComputerName dsctest-1</code></pre>
 
 This command is executed from a directory that contains DSCEA scan result XML files.  It generates a report containing the compliance state for all items that were scanned on system dsctest-1.
