@@ -122,7 +122,10 @@ param
 
     #Begin DSCEA Engine
     Write-Verbose "DSCEA Scan has started"
+    #Scan the Mof file for modules other than built in
     $MofFile = (Get-Item $MofFile).FullName
+    $ModulesRequired = Get-MOFRequiredModules -mofFile $MofFile
+    
     $runspacePool = [RunspaceFactory]::CreateRunspacePool(1, 10).Open() #Min Runspaces, Max Runspaces
     $scriptBlock = {
         param (
@@ -136,6 +139,8 @@ param
             [string]$JobTimeout,
 
             [switch]$Force,
+
+            $ModulesRequired,
 
             [Microsoft.Management.Infrastructure.CimSession]$CimSession
             )
@@ -172,10 +177,22 @@ param
                         Repair-DSCEngine -ComputerName $computer -ErrorAction SilentlyContinue
                     }
                 }
+                #Copy resources if required
+                if ($ModulesRequired -ne $null) {
+                    if($CimSession) {
+                        $session = New-PSSession -ComputerName $CimSession.ComputerName
+                    }
+                    else {
+                        $session = New-PSSession -ComputerName $Computer
+                    }
+                    Copy-DSCResource -PSSession $session -ModulestoCopy $ModulesRequired
+                    Remove-PSSession $session
+                }
                 if($PSBoundParameters.ContainsKey('CimSession')) {
                     $DSCJob = Test-DSCConfiguration -ReferenceConfiguration $mofFile -CimSession $CimSession -AsJob | Wait-Job -Timeout $JobTimeout
                 }
                 else {
+                    
                     $DSCJob = Test-DSCConfiguration -ReferenceConfiguration $mofFile -CimSession $computer -AsJob | Wait-Job -Timeout $JobTimeout
                 }
                 if (!$DSCJob) { 
@@ -209,6 +226,7 @@ param
                 CimSession = $_
                 MofFile = $MofFile
                 JobTimeout = $JobTimeout
+                ModulesRequired = $ModulesRequired
             }
             if($PSBoundParameters.ContainsKey('Force')) {
                 $params += @{Force = $true}
@@ -251,6 +269,7 @@ param
                 Computer = $_
                 MofFile = $MofFile
                 JobTimeout = $JobTimeout
+                ModulesRequired = $ModulesRequired
             }
             if ($PSBoundParameters.ContainsKey('Force')) {
                 $params += @{Force = $true}
