@@ -117,7 +117,10 @@ param
         [string[]]$ComputerName,
 
         [parameter(Mandatory=$true,ParameterSetName='CimSession')]
-        [Microsoft.Management.Infrastructure.CimSession[]]$CimSession
+        [Microsoft.Management.Infrastructure.CimSession[]]$CimSession,
+
+        [parameter(Mandatory=$true,ParameterSetName='Path')]
+        [string]$Path
     )
 
     #Begin DSCEA Engine
@@ -203,6 +206,27 @@ param
     $jobs = @()
     $results = @()
 
+    if($PSBoundParameters.ContainsKey('Path')) {
+        $targets = Get-ChildItem -Path $Path | Where-Object {($_.Name -like '*.mof') -and ($_.Name -notlike '*.meta.mof')}
+        $targets | Sort-Object | ForEach-Object {
+            $params = @{
+                Computer = $_.BaseName
+                MofFile = $_.FullName
+                JobTimeout = $JobTimeout
+            }
+            if ($PSBoundParameters.ContainsKey('Force')) {
+                $params += @{Force = $true}
+            }
+            $job = [Powershell]::Create().AddScript($scriptBlock).AddParameters($params)
+            Write-Verbose "Initiating DSCEA scan on $_"
+		    $job.RunSpacePool = $runspacePool
+            $jobs += [PSCustomObject]@{
+                    Pipe = $job
+                    Result = $job.BeginInvoke()
+            }
+        }
+    }
+
     if($PSBoundParameters.ContainsKey('CimSession')) {
         $CimSession | ForEach-Object {
             $params = @{
@@ -222,16 +246,9 @@ param
             }
         }
     }
-    else {
-        Write-Verbose "Testing connectivity and PowerShell version of remote systems (All Systems must be running PowerShell 5)"
-    
-        if($PSBoundParameters.ContainsKey('ComputerName')){
-            $firstrunlist = $ComputerName
-        }
-        else {
-            $firstrunlist = Get-Content $InputFile
-        }
 
+    if($PSBoundParameters.ContainsKey('ComputerName')){
+         $firstrunlist = $ComputerName
         $psresults = Invoke-Command -ComputerName $firstrunlist -ErrorAction SilentlyContinue -AsJob -ScriptBlock {
             $PSVersionTable.PSVersion
         } | Wait-Job -Timeout $JobTimeout
@@ -264,6 +281,42 @@ param
             }
         }
     }
+
+    if($PSBoundParameters.ContainsKey('ComputerFile')){
+        $firstrunlist = Get-Content $InputFile
+        $psresults = Invoke-Command -ComputerName $firstrunlist -ErrorAction SilentlyContinue -AsJob -ScriptBlock {
+            $PSVersionTable.PSVersion
+        } | Wait-Job -Timeout $JobTimeout
+        $psjobresults = Receive-Job $psresults
+
+        $runlist =  ($psjobresults | where-object -Property Major -ge 5).PSComputername
+        $versionerrorlist =  ($psjobresults | where-object -Property Major -lt 5).PSComputername
+
+        $PSVersionErrorsFile = Join-Path -Path $LogsPath -Childpath ('PSVersionErrors.{0}.xml' -f (Get-Date -Format 'yyyyMMdd-HHmm-ss'))
+    
+        Write-Verbose "Connectivity testing complete"
+        if ($versionerrorlist){
+            Write-Warning "The following systems cannot be scanned as they are not running PowerShell 5.  Please check '$versionerrorlist' for details"
+        }
+        $RunList | Sort-Object | ForEach-Object {
+            $params = @{
+                Computer = $_
+                MofFile = $MofFile
+                JobTimeout = $JobTimeout
+            }
+            if ($PSBoundParameters.ContainsKey('Force')) {
+                $params += @{Force = $true}
+            }
+            $job = [Powershell]::Create().AddScript($scriptBlock).AddParameters($params)
+            Write-Verbose "Initiating DSCEA scan on $_"
+		    $job.RunSpacePool = $runspacePool
+            $jobs += [PSCustomObject]@{
+                    Pipe = $job
+                    Result = $job.BeginInvoke()
+            }
+        }
+    }
+
 
     #Wait for Jobs to Complete
     Write-Verbose "Processing Compliance Testing..."
