@@ -96,6 +96,7 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$LogsPath = '.',
 
+        [parameter(ParameterSetName='ComputerNames','ComputerFile','CimSession')]
         [ValidateNotNullOrEmpty()]
         [string]$MofFile = 'localhost.mof',
 
@@ -125,7 +126,6 @@ param
 
     #Begin DSCEA Engine
     Write-Verbose "DSCEA Scan has started"
-    $MofFile = (Get-Item $MofFile).FullName
     $runspacePool = [RunspaceFactory]::CreateRunspacePool(1, 10).Open() #Min Runspaces, Max Runspaces
     $scriptBlock = {
         param (
@@ -228,6 +228,7 @@ param
     }
 
     if($PSBoundParameters.ContainsKey('CimSession')) {
+        $MofFile = (Get-Item $MofFile).FullName
         $CimSession | ForEach-Object {
             $params = @{
                 CimSession = $_
@@ -248,7 +249,8 @@ param
     }
 
     if($PSBoundParameters.ContainsKey('ComputerName')){
-         $firstrunlist = $ComputerName
+        $MofFile = (Get-Item $MofFile).FullName
+        $firstrunlist = $ComputerName
         $psresults = Invoke-Command -ComputerName $firstrunlist -ErrorAction SilentlyContinue -AsJob -ScriptBlock {
             $PSVersionTable.PSVersion
         } | Wait-Job -Timeout $JobTimeout
@@ -283,6 +285,7 @@ param
     }
 
     if($PSBoundParameters.ContainsKey('ComputerFile')){
+        $MofFile = (Get-Item $MofFile).FullName
         $firstrunlist = Get-Content $InputFile
         $psresults = Invoke-Command -ComputerName $firstrunlist -ErrorAction SilentlyContinue -AsJob -ScriptBlock {
             $PSVersionTable.PSVersion
