@@ -68,7 +68,7 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module
-FunctionsToExport = ('Convert-DSCEAresultsToCSV','Get-DSCEAreport','Send-DSCEACSVtoSQL','Start-DSCEAscan')
+FunctionsToExport = ('Convert-DSCEAresultsToCSV','Get-DSCEAreport','Send-DSCEACSVtoSQL','Start-DSCEAscan','Get-MOFRequiredModules','Copy-DSCResource')
 
 # Cmdlets to export from this module
 CmdletsToExport = '*'
