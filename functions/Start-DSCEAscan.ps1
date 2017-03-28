@@ -126,6 +126,7 @@ param
 
     #Begin DSCEA Engine
     Write-Verbose "DSCEA Scan has started"
+    
     $runspacePool = [RunspaceFactory]::CreateRunspacePool(1, 10).Open() #Min Runspaces, Max Runspaces
     $scriptBlock = {
         param (
@@ -139,6 +140,8 @@ param
             [string]$JobTimeout,
 
             [switch]$Force,
+
+            $ModulesRequired,
 
             [Microsoft.Management.Infrastructure.CimSession]$CimSession
             )
@@ -175,10 +178,22 @@ param
                         Repair-DSCEngine -ComputerName $computer -ErrorAction SilentlyContinue
                     }
                 }
+                #Copy resources if required
+                if ($ModulesRequired -ne $null) {
+                    if($CimSession) {
+                        $session = New-PSSession -ComputerName $CimSession.ComputerName
+                    }
+                    else {
+                        $session = New-PSSession -ComputerName $Computer
+                    }
+                    Copy-DSCResource -PSSession $session -ModulestoCopy $ModulesRequired
+                    Remove-PSSession $session
+                }
                 if($PSBoundParameters.ContainsKey('CimSession')) {
                     $DSCJob = Test-DSCConfiguration -ReferenceConfiguration $mofFile -CimSession $CimSession -AsJob | Wait-Job -Timeout $JobTimeout
                 }
                 else {
+                    
                     $DSCJob = Test-DSCConfiguration -ReferenceConfiguration $mofFile -CimSession $computer -AsJob | Wait-Job -Timeout $JobTimeout
                 }
                 if (!$DSCJob) { 
@@ -229,11 +244,13 @@ param
 
     if($PSBoundParameters.ContainsKey('CimSession')) {
         $MofFile = (Get-Item $MofFile).FullName
+        $ModulesRequired = Get-MOFRequiredModules -mofFile $MofFile
         $CimSession | ForEach-Object {
             $params = @{
                 CimSession = $_
                 MofFile = $MofFile
                 JobTimeout = $JobTimeout
+                ModulesRequired = $ModulesRequired
             }
             if($PSBoundParameters.ContainsKey('Force')) {
                 $params += @{Force = $true}
@@ -250,6 +267,7 @@ param
 
     if($PSBoundParameters.ContainsKey('ComputerName')){
         $MofFile = (Get-Item $MofFile).FullName
+        $ModulesRequired = Get-MOFRequiredModules -mofFile $MofFile
         $firstrunlist = $ComputerName
         $psresults = Invoke-Command -ComputerName $firstrunlist -ErrorAction SilentlyContinue -AsJob -ScriptBlock {
             $PSVersionTable.PSVersion
@@ -286,6 +304,7 @@ param
 
     if($PSBoundParameters.ContainsKey('ComputerFile')){
         $MofFile = (Get-Item $MofFile).FullName
+        $ModulesRequired = Get-MOFRequiredModules -mofFile $MofFile
         $firstrunlist = Get-Content $InputFile
         $psresults = Invoke-Command -ComputerName $firstrunlist -ErrorAction SilentlyContinue -AsJob -ScriptBlock {
             $PSVersionTable.PSVersion
@@ -306,6 +325,7 @@ param
                 Computer = $_
                 MofFile = $MofFile
                 JobTimeout = $JobTimeout
+                ModulesRequired = $ModulesRequired
             }
             if ($PSBoundParameters.ContainsKey('Force')) {
                 $params += @{Force = $true}
