@@ -121,9 +121,7 @@ param
         [Microsoft.Management.Infrastructure.CimSession[]]$CimSession,
 
         [parameter(Mandatory=$true,ParameterSetName='Path')]
-        [string]$Path,
-
-        [Microsoft.Management.Infrastructure.CimSession[]]$CimSession
+        [string]$Path
     )
 
     #Begin DSCEA Engine
