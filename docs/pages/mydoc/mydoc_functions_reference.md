@@ -47,7 +47,7 @@ The full file path for the DSCEA scan results XML file.
 The defined path must already exist.
 If no value is provided, the result XML file will be saved to the current directory.
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
@@ -64,7 +64,7 @@ The full file path for the any DSCEA scan log files.
 The defined path must already exist.
 If no value is provided, log files will be saved to the current directory.
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
@@ -80,7 +80,7 @@ Accept wildcard characters: False
 The file name (full file path) to the MOF file you are looking to use with DSCEA to perform a scan. 
 If no value is provided, Start-DSCEAscan will look into the current directory for a file named localhost.mof
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
@@ -96,7 +96,7 @@ Accept wildcard characters: False
 The file name (full file path) to a text file that contains a list of computers you want to scan. 
 Either use the ComputerName paramter or InputFile, DSCEA does not currently support using both.
 
-```yaml
+```
 Type: String
 Parameter Sets: InputFile
 Aliases: 
@@ -111,7 +111,7 @@ Accept wildcard characters: False
 ### -JobTimeout
 Individual system timeout (seconds) If no value is provided, the default value of 600 seconds will be used.
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
@@ -126,7 +126,7 @@ Accept wildcard characters: False
 ### -ScanTimeout
 Total DSCEA scan timeout (seconds)  If no value is provided, the default value of 3600 seconds will be used.
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
@@ -142,7 +142,7 @@ Accept wildcard characters: False
 The force parameter attempts to close any running DSC related processes on systems being scanned before a scan begins to avoid LCM conflicts. 
 Force is not enabled by default.
 
-```yaml
+```
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: 
@@ -158,7 +158,7 @@ Accept wildcard characters: False
 The file name for the DSCEA scan results XML file. 
 If no value is provided, a time based file name will be auto-generated.
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
@@ -173,7 +173,7 @@ Accept wildcard characters: False
 ### -ComputerName
 Comma seperated list of computer names that you want to scan
 
-```yaml
+```
 Type: String[]
 Parameter Sets: ComputerName
 Aliases: 
@@ -188,7 +188,7 @@ Accept wildcard characters: False
 ### -CimSession
 Provide DSCEA with a CimSession object to perform compliance scans against remote systems that are either not members of the same domain as the management system, are workgroup systems or require other credentials
 
-```yaml
+```
 Type: CimSession[]
 Parameter Sets: CimSession
 Aliases: 
@@ -312,7 +312,7 @@ Used to create viewable reports after Start-DSCEAscan has created a results.xml 
 ### -ItemName
 Switch parameter - This is the item name from the configuration file, used to generate a report of every machine's compliance against that item
 
-```yaml
+```
 Type: String
 Parameter Sets: ItemName
 Aliases: 
@@ -327,7 +327,7 @@ Accept wildcard characters: False
 ### -ComputerName
 Switch parameter - Supplying a computer name will cause the report to display all items (true/false) pertaining to ComputerName
 
-```yaml
+```
 Type: String
 Parameter Sets: ComputerName
 Aliases: 
@@ -342,7 +342,7 @@ Accept wildcard characters: False
 ### -Overall
 Switch parameter - Indicating that the report generated will display all up true/false per computer in regards to compliance against the entire configuration file
 
-```yaml
+```
 Type: SwitchParameter
 Parameter Sets: Overall
 Aliases: 
@@ -357,7 +357,7 @@ Accept wildcard characters: False
 ### -Detailed
 Switch parameter - Indicating that the report generated will display all non-compliant configuration file items detected, grouped by computer
 
-```yaml
+```
 Type: SwitchParameter
 Parameter Sets: Detailed
 Aliases: 
@@ -373,7 +373,7 @@ Accept wildcard characters: False
 The file name (full file path) of the XML file you would like to convert. 
 If one is not provided, Get-DSCEAreport looks to the current directory for the most recently created XML file.
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
@@ -390,7 +390,7 @@ The full file path to use as a location to store HTML reports.
 The file path must be a pre-existing folder. 
 If one is not provided, Get-DSCEAreport will create the HTML file in the current directory.
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
@@ -461,7 +461,7 @@ Used to convert the raw XML output from a DSCEA scan to a more consumable format
 The file name (full file path) of the XML file you would like to convert to CSV. 
 If one is not provided, Convert-DSCEAresultsToCSV looks to the current directory for the most recently created XML file.
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
@@ -478,7 +478,7 @@ The new file name (full file path) of the output CSV file.
 The file path must include a pre-existing folder. 
 If one is not provided, Convert-DSCEAresultsToCSV will create output.csv in the current directory.
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
@@ -493,7 +493,7 @@ Accept wildcard characters: False
 ### -ExceptionsFile
 {{Fill ExceptionsFile Description}}
 
-```yaml
+```
 Type: String
 Parameter Sets: (All)
 Aliases: 
