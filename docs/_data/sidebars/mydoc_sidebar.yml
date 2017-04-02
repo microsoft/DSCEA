@@ -79,6 +79,10 @@ entries:
       url: /mydoc_use_cases.html
       output: web
 
+    - title: DSCEA functions reference
+      url: /mydoc_functions_reference.html
+      output: web
+
   - title: Contributing
     output: web
     folderitems:
