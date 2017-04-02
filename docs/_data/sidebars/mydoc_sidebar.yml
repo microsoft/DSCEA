@@ -79,7 +79,7 @@ entries:
       url: /mydoc_use_cases.html
       output: web
 
-    - title: DSCEA functions reference
+    - title: DSCEA Functions Reference
       url: /mydoc_functions_reference.html
       output: web
 
