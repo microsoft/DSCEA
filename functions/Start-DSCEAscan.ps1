@@ -13,7 +13,7 @@ The file name (full file path) to the MOF file you are looking to use with DSCEA
 Comma seperated list of computer names that you want to scan
 
 .PARAMETER InputFile
-The file name (full file path) to a text file that contains a list of computers you want to scan.  Either use the ComputerName paramter or InputFile, DSCEA does not currently support using both.
+The file name (full file path) to a text file that contains a list of computers you want to scan
 
 .PARAMETER CimSession
 Provide DSCEA with a CimSession object to perform compliance scans against remote systems that are either not members of the same domain as the management system, are workgroup systems or require other credentials

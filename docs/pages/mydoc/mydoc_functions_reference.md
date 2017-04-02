@@ -93,8 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputFile
-The file name (full file path) to a text file that contains a list of computers you want to scan. 
-Either use the ComputerName paramter or InputFile, DSCEA does not currently support using both.
+The file name (full file path) to a text file that contains a list of computers you want to scan
 
 ```
 Type: String
