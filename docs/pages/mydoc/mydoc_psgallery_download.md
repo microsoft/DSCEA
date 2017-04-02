@@ -17,7 +17,7 @@ Details on downloading DSCEA from the PowerShell Gallery can be found at the lin
 
 The PowerShell Gallery site provides the following command:
 
-<pre><code>PS C:\> Save-Module -Name DSCEA -Path <path> </code></pre>
+<pre><code>PS C:\> Save-Module -Name DSCEA -Path &lt;path&gt; </code></pre>
 
 You must provide an existing folder path on your internet connected system to store the DSCEA module.  Once you have downloaded the DSCEA module, you can copy the module files to C:\Program Files\WindowsPowerShell\Modules or any other location defined in the PSModulePath variable on your management system.
 
