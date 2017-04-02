@@ -5,7 +5,7 @@ permalink: mydoc_functions_reference.html
 folder: mydoc
 ---
 
-<h5 id="Top"></h5>
+<div id="FunctionsTop"></div>
 
 <p><a href="#StartDSCEAscan">Start-DSCEAscan</a></p>
 <p><a href="#GetDSCEAreport">Get-DSCEAreport</a></p>
@@ -277,7 +277,7 @@ This MOF file specifies the settings to check for during the scan.
 Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
 <h2 id="GetDSCEAreport"><strong>Get-DSCEAreport</strong></h2>
-<p><a href="#Top">Go back to the top</a></p>
+<p><a href="#FunctionsTop">Go back to the top</a></p>
 
 ## SYNOPSIS
 Generates a HTML based report after Start-DSCEAscan has been run
@@ -441,7 +441,7 @@ Description
 This command returns all configuration items for computer 'dc1'
 
 <h2 id="ConvertDSCEAresultsToCSV"><strong>Convert-DSCEAresultsToCSV</strong></h2>
-<p><a href="#Top">Go back to the top</a></p>
+<p><a href="#FunctionsTop">Go back to the top</a></p>
 
 ## SYNOPSIS
 Creates CSV data file from DSCEA results
@@ -535,6 +535,6 @@ Description
 Converts C:\Users\username\Documents\DSCEA\results.20170311-2307-31.xml to a CSV file saved at C:\Users\username\Documents\DSCEA\output.csv
 
 <h2 id="SendDSCEACSVtoSQL"><strong>Send-DSCEACSVtoSQL</strong></h2>
-<p><a href="#Top">Go back to the top</a></p>
+<p><a href="#FunctionsTop">Go back to the top</a></p>
 
 The Send-DSCEACSVtoSQL function is reserved for future use.
