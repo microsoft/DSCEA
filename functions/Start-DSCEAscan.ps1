@@ -99,7 +99,7 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$MofFile = 'localhost.mof',
 
-        [parameter(Mandatory=$true,ParameterSetName='ComputerFile')]
+        [parameter(Mandatory=$true,ParameterSetName='InputFile')]
         [string]$InputFile,
 
         [ValidateNotNullOrEmpty()]
@@ -113,7 +113,7 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$ResultsFile = "results.$(Get-Date -Format 'yyyyMMdd-HHmm-ss').xml",
 
-        [parameter(Mandatory=$true,ParameterSetName='ComputerNames')]
+        [parameter(Mandatory=$true,ParameterSetName='ComputerName')]
         [string[]]$ComputerName,
 
         [parameter(Mandatory=$true,ParameterSetName='CimSession')]
