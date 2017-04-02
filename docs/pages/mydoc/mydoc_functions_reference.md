@@ -5,9 +5,7 @@ permalink: mydoc_functions_reference.html
 folder: mydoc
 ---
 
-<div id="FunctionsTop"></div>
-
-<p><a href="#StartDSCEAscan">Start-DSCEAscan</a></p>
+<p id="FunctionsTop"><a href="#StartDSCEAscan">Start-DSCEAscan</a></p>
 <p><a href="#GetDSCEAreport">Get-DSCEAreport</a></p>
 <p><a href="#ConvertDSCEAresultsToCSV">Convert-DSCEAresultsToCSV</a></p>
 <p><a href="#SendDSCEACSVtoSQL">Send-DSCEACSVtoSQL</a></p>
