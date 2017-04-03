@@ -96,7 +96,10 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$LogsPath = '.',
 
-        [parameter(Mandatory=$true,ParameterSetName=('ComputerName','InputFile','CimSession'))]
+        [parameter(Mandatory=$true)]
+        [parameter(ParameterSetName='ComputerName')]
+        [parameter(ParameterSetName='InputFile')]
+        [parameter(ParameterSetName='CimSession')]
         [string]$MofFile,
 
         [parameter(Mandatory=$true,ParameterSetName='InputFile')]
