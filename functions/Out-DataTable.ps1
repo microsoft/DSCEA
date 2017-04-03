@@ -1,106 +1,106 @@
-####################### 
-function Get-Type 
-{ 
-    param($type) 
- 
-$types = @( 
-'System.Boolean', 
-'System.Byte[]', 
-'System.Byte', 
-'System.Char', 
-'System.Datetime', 
-'System.Decimal', 
-'System.Double', 
-'System.Guid', 
-'System.Int16', 
-'System.Int32', 
-'System.Int64', 
-'System.Single', 
-'System.UInt16', 
-'System.UInt32', 
-'System.UInt64') 
- 
-    if ( $types -contains $type ) { 
-        Write-Output "$type" 
-    } 
-    else { 
-        Write-Output 'System.String' 
-         
-    } 
-} #Get-Type 
- 
-####################### 
-<# 
-.SYNOPSIS 
-Creates a DataTable for an object 
-.DESCRIPTION 
-Creates a DataTable based on an objects properties. 
-.INPUTS 
-Object 
-    Any object can be piped to Out-DataTable 
-.OUTPUTS 
-   System.Data.DataTable 
-.EXAMPLE 
-$dt = Get-psdrive| Out-DataTable 
-This example creates a DataTable from the properties of Get-psdrive and assigns output to $dt variable 
-.NOTES 
-Adapted from script by Marc van Orsouw see link 
-Version History 
-v1.0  - Chad Miller - Initial Release 
-v1.1  - Chad Miller - Fixed Issue with Properties 
-v1.2  - Chad Miller - Added setting column datatype by property as suggested by emp0 
-v1.3  - Chad Miller - Corrected issue with setting datatype on empty properties 
-v1.4  - Chad Miller - Corrected issue with DBNull 
-v1.5  - Chad Miller - Updated example 
-v1.6  - Chad Miller - Added column datatype logic with default to string 
-v1.7 - Chad Miller - Fixed issue with IsArray 
-.LINK 
-http://thepowershellguy.com/blogs/posh/archive/2007/01/21/powershell-gui-scripblock-monitor-script.aspx 
-#> 
-function Out-DataTable 
-{ 
-    [CmdletBinding()] 
-    param([Parameter(Position=0, Mandatory=$true, ValueFromPipeline = $true)] [PSObject[]]$InputObject) 
- 
-    Begin 
-    { 
-        $dt = new-object Data.datatable   
-        $First = $true  
-    } 
-    Process 
-    { 
-        foreach ($object in $InputObject) 
-        { 
-            $DR = $DT.NewRow()   
-            foreach($property in $object.PsObject.get_properties()) 
-            {   
-                if ($first) 
-                {   
-                    $Col =  new-object Data.DataColumn   
-                    $Col.ColumnName = $property.Name.ToString()   
-                    if ($property.value) 
-                    { 
-                        if ($property.value -isnot [System.DBNull]) { 
-                            $Col.DataType = [System.Type]::GetType("$(Get-Type $property.TypeNameOfValue)") 
-                         } 
-                    } 
-                    $DT.Columns.Add($Col) 
-                }   
-                if ($property.Gettype().IsArray) { 
-                    $DR.Item($property.Name) =$property.value | ConvertTo-XML -AS String -NoTypeInformation -Depth 1 
-                }   
-               else { 
-                    $DR.Item($property.Name) = $property.value 
-                } 
-            }   
-            $DT.Rows.Add($DR)   
-            $First = $false 
-        } 
-    }  
-      
-    End 
-    { 
-        Write-Output @(,($dt)) 
-    } 
- 
-} #Out-DataTable
+#######################Â 
+functionÂ Get-TypeÂ 
+{Â 
+Â Â Â Â param($type)Â 
+Â 
+$typesÂ =Â @(Â 
+'System.Boolean',Â 
+'System.Byte[]',Â 
+'System.Byte',Â 
+'System.Char',Â 
+'System.Datetime',Â 
+'System.Decimal',Â 
+'System.Double',Â 
+'System.Guid',Â 
+'System.Int16',Â 
+'System.Int32',Â 
+'System.Int64',Â 
+'System.Single',Â 
+'System.UInt16',Â 
+'System.UInt32',Â 
+'System.UInt64')Â 
+Â 
+Â Â Â Â ifÂ (Â $typesÂ -containsÂ $typeÂ )Â {Â 
+Â Â Â Â Â Â Â Â Write-OutputÂ "$type"Â 
+Â Â Â Â }Â 
+Â Â Â Â elseÂ {Â 
+Â Â Â Â Â Â Â Â Write-OutputÂ 'System.String'Â 
+Â Â Â Â Â Â Â Â Â 
+Â Â Â Â }Â 
+}Â #Get-TypeÂ 
+Â 
+#######################Â 
+<#Â 
+.SYNOPSISÂ 
+CreatesÂ aÂ DataTableÂ forÂ anÂ objectÂ 
+.DESCRIPTIONÂ 
+CreatesÂ aÂ DataTableÂ basedÂ onÂ anÂ objectsÂ properties.Â 
+.INPUTSÂ 
+ObjectÂ 
+Â Â Â Â AnyÂ objectÂ canÂ beÂ pipedÂ toÂ Out-DataTableÂ 
+.OUTPUTSÂ 
+Â Â Â System.Data.DataTableÂ 
+.EXAMPLEÂ 
+$dtÂ =Â Get-psdrive|Â Out-DataTableÂ 
+ThisÂ exampleÂ createsÂ aÂ DataTableÂ fromÂ theÂ propertiesÂ ofÂ Get-psdriveÂ andÂ assignsÂ outputÂ toÂ $dtÂ variableÂ 
+.NOTESÂ 
+AdaptedÂ fromÂ scriptÂ byÂ MarcÂ vanÂ OrsouwÂ seeÂ linkÂ 
+VersionÂ HistoryÂ 
+v1.0Â Â -Â ChadÂ MillerÂ -Â InitialÂ ReleaseÂ 
+v1.1Â Â -Â ChadÂ MillerÂ -Â FixedÂ IssueÂ withÂ PropertiesÂ 
+v1.2Â Â -Â ChadÂ MillerÂ -Â AddedÂ settingÂ columnÂ datatypeÂ byÂ propertyÂ asÂ suggestedÂ byÂ emp0Â 
+v1.3Â Â -Â ChadÂ MillerÂ -Â CorrectedÂ issueÂ withÂ settingÂ datatypeÂ onÂ emptyÂ propertiesÂ 
+v1.4Â Â -Â ChadÂ MillerÂ -Â CorrectedÂ issueÂ withÂ DBNullÂ 
+v1.5Â Â -Â ChadÂ MillerÂ -Â UpdatedÂ exampleÂ 
+v1.6Â Â -Â ChadÂ MillerÂ -Â AddedÂ columnÂ datatypeÂ logicÂ withÂ defaultÂ toÂ stringÂ 
+v1.7Â -Â ChadÂ MillerÂ -Â FixedÂ issueÂ withÂ IsArrayÂ 
+.LINKÂ 
+http://thepowershellguy.com/blogs/posh/archive/2007/01/21/powershell-gui-scripblock-monitor-script.aspxÂ 
+#>Â 
+functionÂ Out-DataTableÂ 
+{Â 
+Â Â Â Â [CmdletBinding()]Â 
+Â Â Â Â param([Parameter(Position=0,Â Mandatory=$true,Â ValueFromPipelineÂ =Â $true)]Â [PSObject[]]$InputObject)Â 
+Â 
+Â Â Â Â BeginÂ 
+Â Â Â Â {Â 
+Â Â Â Â Â Â Â Â $dtÂ =Â new-objectÂ Data.datatableÂ Â Â 
+Â Â Â Â Â Â Â Â $FirstÂ =Â $trueÂ Â 
+Â Â Â Â }Â 
+Â Â Â Â ProcessÂ 
+Â Â Â Â {Â 
+Â Â Â Â Â Â Â Â foreachÂ ($objectÂ inÂ $InputObject)Â 
+Â Â Â Â Â Â Â Â {Â 
+Â Â Â Â Â Â Â Â Â Â Â Â $DRÂ =Â $DT.NewRow()Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â foreach($propertyÂ inÂ $object.PsObject.get_properties())Â 
+Â Â Â Â Â Â Â Â Â Â Â Â {Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â ifÂ ($first)Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â {Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $ColÂ =Â Â new-objectÂ Data.DataColumnÂ Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $Col.ColumnNameÂ =Â $property.Name.ToString()Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â ifÂ ($property.value)Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â {Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â ifÂ ($property.valueÂ -isnotÂ [System.DBNull])Â {Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $Col.DataTypeÂ =Â [System.Type]::GetType("$(Get-TypeÂ $property.TypeNameOfValue)")Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $DT.Columns.Add($Col)Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â ifÂ ($property.Gettype().IsArray)Â {Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $DR.Item($property.Name)Â =$property.valueÂ |Â ConvertTo-XMLÂ -ASÂ StringÂ -NoTypeInformationÂ -DepthÂ 1Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â elseÂ {Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $DR.Item($property.Name)Â =Â $property.valueÂ 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }Â 
+Â Â Â Â Â Â Â Â Â Â Â Â }Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â $DT.Rows.Add($DR)Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â $FirstÂ =Â $falseÂ 
+Â Â Â Â Â Â Â Â }Â 
+Â Â Â Â }Â Â 
+Â Â Â Â Â Â 
+Â Â Â Â EndÂ 
+Â Â Â Â {Â 
+Â Â Â Â Â Â Â Â Write-OutputÂ @(,($dt))Â 
+Â Â Â Â }Â 
+Â 
+}Â #Out-DataTable
