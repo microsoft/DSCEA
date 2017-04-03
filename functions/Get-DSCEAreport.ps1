@@ -58,10 +58,10 @@ This command returns non-compliant configuration file items detected, grouped by
     [CmdLetBinding()]
     param
     (
-        [parameter(Mandatory=$true,ParameterSetName='Item')]
+        [parameter(Mandatory=$true,ParameterSetName='ItemName')]
         [String]$ItemName,
 
-        [parameter(Mandatory=$true,ParameterSetName='Computer')]
+        [parameter(Mandatory=$true,ParameterSetName='ComputerName')]
         [String]$ComputerName,
 
         [parameter(Mandatory=$true,ParameterSetName='Overall')]

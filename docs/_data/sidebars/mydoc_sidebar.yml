@@ -71,8 +71,16 @@ entries:
       url: /mydoc_report_powerbi.html
       output: web
       
+    - title: Convert DSCEA scan results to CSV
+      url: /mydoc_csv_export.html
+      output: web
+
     - title: Use Cases
       url: /mydoc_use_cases.html
+      output: web
+
+    - title: DSCEA Functions Reference
+      url: /mydoc_functions_reference.html
       output: web
 
   - title: Contributing
