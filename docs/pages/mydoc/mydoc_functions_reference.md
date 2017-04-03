@@ -259,13 +259,12 @@ This scan also specifies custom values for -ResultsFile to provide the file name
 ### -------------------------- EXAMPLE 6 --------------------------
 ```
 $UserName = 'LocalUser'
-```
-
 $Password = ConvertTo-SecureString -String "P@ssw0rd" -AsPlainText -Force
 $Servers = "dsctest-4,dsctest-5,dsctest-6"
 $Cred =  New-Object System.Management.Automation.PsCredential -ArgumentList $UserName, $Password
 $Sessions = New-CimSession -Authentication Negotiate -ComputerName $Servers -Credential $Cred
 Start-DscEaScan -CimSession $Sessions -MofFile C:\Users\username\Documents\DSCEA\localhost.mof -Verbose
+```
 
 Description
 -----------
