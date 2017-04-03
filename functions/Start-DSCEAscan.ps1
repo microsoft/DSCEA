@@ -96,7 +96,7 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$LogsPath = '.',
 
-        [parameter(Mandatory=$true,ParameterSetName='ComputerName','InputFile','CimSession')]
+        [parameter(Mandatory=$true,ParameterSetName=('ComputerName','InputFile','CimSession'))]
         [string]$MofFile,
 
         [parameter(Mandatory=$true,ParameterSetName='InputFile')]
@@ -301,7 +301,7 @@ param
         }
     }
 
-    if($PSBoundParameters.ContainsKey('ComputerFile')){
+    if($PSBoundParameters.ContainsKey('InputFile')){
         $MofFile = (Get-Item $MofFile).FullName
         $ModulesRequired = Get-MOFRequiredModules -mofFile $MofFile
         $firstrunlist = Get-Content $InputFile
