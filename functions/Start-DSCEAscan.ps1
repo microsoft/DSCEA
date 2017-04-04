@@ -145,10 +145,10 @@ param
 
             $ModulesRequired,
 
-            [Microsoft.Management.Infrastructure.CimSession]$CimSession
-            )
+            [Microsoft.Management.Infrastructure.CimSession]$CimSession,
 
-        $functionRoot = Join-Path -Path $PSScriptRoot -ChildPath 'Functions' -Resolve
+            [string]$functionRoot
+            )
 
         Get-ChildItem -Path $functionRoot -Filter '*.ps1' | ForEach-Object {
             . $_.FullName | Out-Null
@@ -212,6 +212,8 @@ param
                 Computer = $_.BaseName
                 MofFile = $_.FullName
                 JobTimeout = $JobTimeout
+                FunctionRoot = $functionRoot
+                ModulesRequired = $ModulesRequired
             }
             if ($PSBoundParameters.ContainsKey('Force')) {
                 $params += @{Force = $true}
@@ -235,6 +237,7 @@ param
                 MofFile = $MofFile
                 JobTimeout = $JobTimeout
                 ModulesRequired = $ModulesRequired
+                FunctionRoot = $functionRoot
             }
             if($PSBoundParameters.ContainsKey('Force')) {
                 $params += @{Force = $true}
@@ -272,6 +275,8 @@ param
                 Computer = $_
                 MofFile = $MofFile
                 JobTimeout = $JobTimeout
+                FunctionRoot = $functionRoot
+                ModulesRequired = $ModulesRequired
             }
             if ($PSBoundParameters.ContainsKey('Force')) {
                 $params += @{Force = $true}
@@ -310,6 +315,7 @@ param
                 MofFile = $MofFile
                 JobTimeout = $JobTimeout
                 ModulesRequired = $ModulesRequired
+                FunctionRoot = $functionRoot
             }
             if ($PSBoundParameters.ContainsKey('Force')) {
                 $params += @{Force = $true}
