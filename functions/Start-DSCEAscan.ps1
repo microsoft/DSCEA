@@ -212,8 +212,8 @@ param
                 Computer = $_.BaseName
                 MofFile = $_.FullName
                 JobTimeout = $JobTimeout
-                FunctionRoot = $functionRoot
                 ModulesRequired = $ModulesRequired
+                FunctionRoot = $functionRoot
             }
             if ($PSBoundParameters.ContainsKey('Force')) {
                 $params += @{Force = $true}
@@ -275,8 +275,8 @@ param
                 Computer = $_
                 MofFile = $MofFile
                 JobTimeout = $JobTimeout
-                FunctionRoot = $functionRoot
                 ModulesRequired = $ModulesRequired
+                FunctionRoot = $functionRoot
             }
             if ($PSBoundParameters.ContainsKey('Force')) {
                 $params += @{Force = $true}
