@@ -96,10 +96,9 @@ param
         [ValidateNotNullOrEmpty()]
         [string]$LogsPath = '.',
 
-        [parameter(Mandatory=$true)]
-        [parameter(ParameterSetName='ComputerName')]
-        [parameter(ParameterSetName='InputFile')]
-        [parameter(ParameterSetName='CimSession')]
+        [parameter(Mandatory=$true,ParameterSetName='ComputerName')]
+        [parameter(Mandatory=$true,ParameterSetName='InputFile')]
+        [parameter(Mandatory=$true,ParameterSetName='CimSession')]
         [string]$MofFile,
 
         [parameter(Mandatory=$true,ParameterSetName='InputFile')]
@@ -212,7 +211,7 @@ param
                 Computer = $_.BaseName
                 MofFile = $_.FullName
                 JobTimeout = $JobTimeout
-                ModulesRequired = $ModulesRequired
+                ModulesRequired = Get-MOFRequiredModules -mofFile $_.FullName
                 FunctionRoot = $functionRoot
             }
             if ($PSBoundParameters.ContainsKey('Force')) {
