@@ -201,7 +201,7 @@ param
         }
         if($PSBoundParameters.ContainsKey('CimSession'))
         {
-            obj += @{Computer = $cimsession.ComputerName}
+            $obj += @{Computer = $cimsession.ComputerName}
         } else {
             $obj += @{Computer = $computer}
         }
