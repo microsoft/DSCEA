@@ -99,7 +99,7 @@ param
         [parameter(Mandatory=$true,ParameterSetName='ComputerName')]
         [parameter(Mandatory=$true,ParameterSetName='InputFile')]
         [parameter(Mandatory=$true,ParameterSetName='CimSession')]
-        [ValidatePattern(".mof$")]
+        [ValidatePattern("\.mof$")]
         [string]$MofFile,
 
         [parameter(Mandatory=$true,ParameterSetName='InputFile')]
