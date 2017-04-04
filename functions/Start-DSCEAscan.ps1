@@ -194,19 +194,22 @@ param
             } 
         }
 
-        $obj = [PSCustomObject]@{
-            RunTime = $runTime
-            Compliance = $compliance
-            Exception = $JobFailedError
-        }
         if($PSBoundParameters.ContainsKey('CimSession'))
         {
-            $obj += @{Computer = $cimsession.ComputerName}
+            return [PSCustomObject]@{
+                RunTime = $runTime
+                Compliance = $compliance
+                Exception = $JobFailedError
+                Computer = $cimsession.ComputerName
+            }
         } else {
-            $obj += @{Computer = $computer}
+            return [PSCustomObject]@{
+                RunTime = $runTime
+                Compliance = $compliance
+                Exception = $JobFailedError
+                Computer = $computer
+            }
         }
-
-        return $obj
     }
 
     $jobs = @()
