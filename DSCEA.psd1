@@ -27,7 +27,7 @@ CompanyName = 'Microsoft'
 Copyright = '(c) 2016 Microsoft. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'DSCEA is a scanning engine for processing Test-DSCConfiguration results.
+Description = 'DSCEA is a scanning engine for processing Test-DSCConfiguration results that provides the ability to scan an environment for compliance against a defined PowerShell DSC configuration.
 Visit https://microsoft.github.io/DSCEA for more information.
 '
 
@@ -94,7 +94,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('DesiredStateConfiguration', 'DSC', 'test', 'testing', 'report', 'reporting', 'audit', 'auditing', 'config', 'configuration', 'security', 'lockdown', 'harden', 'hardening', 'Test-DscConfiguration')
+        Tags = @('DesiredStateConfiguration', 'DSC', 'compliance', 'compliant', 'test', 'testing', 'report', 'reporting', 'audit', 'auditing', 'config', 'configuration', 'security', 'lockdown', 'harden', 'hardening', 'Test-DscConfiguration')
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/Microsoft/DSCEA/blob/master/LICENSE'
