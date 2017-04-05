@@ -15,6 +15,7 @@ folder: mydoc
 * Added additional config examples
     * Config that uses non built-in DSC resources
     * Config that showcases using the DSC script resource
+        * Thank you to [Patrick Mercier](https://www.linkedin.com/in/patrick-mercier-80876941/) for your contributions and feedback on this!
 
 * Bug fixes
     * Fixed issue where errors were thrown when running **Import-Module DSCEA**
