@@ -72,10 +72,7 @@ This command returns non-compliant configuration file items detected, grouped by
 
         [String]$InFile = (Get-ChildItem .\results*.xml | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1).FullName,
 
-        [String]$OutPath = '.',
-
-        [parameter(ParameterSetName='Overall,Detailed')]
-        [switch]$NonCompliant
+        [String]$OutPath = '.'
     )
     $env:PSModulePath -split ';' | ForEach-Object {
         if(Test-Path (Join-Path -Path $_ -ChildPath 'DSCEA')) {
