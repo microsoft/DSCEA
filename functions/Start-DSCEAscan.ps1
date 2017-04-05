@@ -18,6 +18,9 @@ The file name (full file path) to a text file that contains a list of computers 
 .PARAMETER CimSession
 Provide DSCEA with a CimSession object to perform compliance scans against remote systems that are either not members of the same domain as the management system, are workgroup systems or require other credentials
 
+.PARAMETER Path
+Provide DSCEA with a folder path containing machine specific MOF files to allow for a scan of those systems against unique per system settings
+
 .PARAMETER ResultsFile
 The file name for the DSCEA scan results XML file.  If no value is provided, a time based file name will be auto-generated.
 
@@ -86,6 +89,13 @@ Start-DscEaScan -CimSession $Sessions -MofFile C:\Users\username\Documents\DSCEA
 Description
 -----------
 This command utilizes New-CimSession and executes a DSCEA scan against 3 remote non-domain systems, dsctest-4, dsctest-5 and dsctest-6 using a locally defined MOF file that exists at "C:\Users\username\Documents\DSCEA". This MOF file specifies the settings to check for during the scan. Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
+
+.EXAMPLE
+Start-DSCEAscan -Path 'C:\Users\username\Documents\DSCEA\MOFFiles'
+
+Description
+-----------
+This command executes a DSCEA scan against the systems supplied as machine specific MOF files stored inside 'C:\Users\username\Documents\DSCEA\MOFFiles'. Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 #>
 [CmdletBinding()]
 param

@@ -35,6 +35,12 @@ Start-DSCEAscan [-OutputPath <String>] [-LogsPath <String>] [-MofFile <String>] 
  [-ScanTimeout <String>] [-Force] [-ResultsFile <String>] -CimSession <CimSession[]>
 ```
 
+### Path
+```
+Start-DSCEAscan [-OutputPath <String>] [-LogsPath <String>] [-MofFile <String>] -Path <String>
+ [-JobTimeout <String>] [-ScanTimeout <String>] [-Force] [-ResultsFile <String>]
+```
+
 ## DESCRIPTION
 Run this function after you have defined the remote systems to scan and have created a MOF file that defines the settings you want to check against
 
@@ -197,6 +203,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Path
+Provide DSCEA with a folder path containing machine specific MOF files to allow for a scan of those systems against unique per system settings
+
+```
+Type: String
+Parameter Sets: Path
+Aliases: 
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
@@ -271,6 +292,15 @@ Description
 This command utilizes New-CimSession and executes a DSCEA scan against 3 remote non-domain systems, dsctest-4, dsctest-5 and dsctest-6 using a locally defined MOF file that exists at "C:\Users\username\Documents\DSCEA".
 This MOF file specifies the settings to check for during the scan.
 Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
+
+### -------------------------- EXAMPLE 7 --------------------------
+```
+Start-DSCEAscan -Path 'C:\Users\username\Documents\DSCEA\MOFFiles'
+```
+
+Description
+-----------
+This command executes a DSCEA scan against the systems supplied as machine specific MOF files stored inside 'C:\Users\username\Documents\DSCEA\MOFFiles'. Start-DSCEAscan returns a XML results file containing raw data that can be used with other functions, such as Get-DSCEAreport to create reports with consumable information.
 
 <h2 id="GetDSCEAreport"><strong>Get-DSCEAreport</strong></h2>
 <p><a href="#FunctionsTop">Go back to the top</a></p>
