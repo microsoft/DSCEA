@@ -87,7 +87,7 @@ This command returns non-compliant configuration file items detected, grouped by
     if($Overall) {
         $results | 
         select-object -ExpandProperty Compliance | Where-Object {$_.PSComputerName -ne $null} |
-        select-object @{Name="Computer";Expression={$_.PSComputerName}}, @{Name="Compliant";Expression={$_.InDesiredState}} |
+        select-object @{Name="Computer";Expression={$_.PSComputerName}}, @{Name="Compliant";Expression={$_.InDesiredState}} | Sort-Object -Property Compliant |
         ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
         Out-File (Join-Path -Path $OutPath -ChildPath 'OverallComplianceReport.html')
         Get-ItemProperty (Join-Path -Path $OutPath -ChildPath 'OverallComplianceReport.html')
@@ -108,7 +108,7 @@ This command returns non-compliant configuration file items detected, grouped by
                 $_.ResourcesInDesiredState | ForEach-Object {$_ | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState}
                 $_.ResourcesNotInDesiredState | ForEach-Object {$_ | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState}
             }
-        } | Where-object {$_.InstanceName -ieq $ItemName} | 
+        } | Where-object {$_.InstanceName -ieq $ItemName} | Sort-Object -Property InDesiredState |
         ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
         Out-File (Join-Path -Path $OutPath -ChildPath "ItemComplianceReport-$ItemName.html")
         Get-ItemProperty (Join-Path -Path $OutPath -ChildPath "ItemComplianceReport-$ItemName.html")
