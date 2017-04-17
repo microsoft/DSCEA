@@ -21,7 +21,7 @@ configuration ScriptResourceSample {
                 #Returns True or False on whether the system is in the desired state
             }
             SetScript = {
-                Set-NetFirewallRule -DisplayGroup 'Remote Desktop' -Enabled False
+                Disable-NetFirewallRule -DisplayGroup 'Remote Desktop'
                 #Makes it so!
             }
         }
