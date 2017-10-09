@@ -1,6 +1,6 @@
 # DSC Environment Analyzer
 
-https://dscea.visualstudio.com/_apis/public/build/definitions/4406bdf8-fc9e-4378-ba79-7d7fe80ca6f8/1/badge
+![Build Status](https://dscea.visualstudio.com/_apis/public/build/definitions/4406bdf8-fc9e-4378-ba79-7d7fe80ca6f8/1/badge)
 
 DSC Environment Analyzer (DSCEA) is a simple implementation of PowerShell Desired State Configuration that uses the declarative nature of DSC to scan Windows OS based systems in an environment against a defined reference MOF file and generate compliance reports as to whether systems match the desired configuration.
 
