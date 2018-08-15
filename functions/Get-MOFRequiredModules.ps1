@@ -21,7 +21,14 @@
     $requiredModulesinMof = @()
     Switch -Regex (Get-Content $mofFile)
     {
-        "ModuleName" {$requiredModulesInMof += $_.Split("`"")[1]}
+        "ModuleName" 
+        { 
+            $Module = $_.Split("`"")[1]
+            if ($requiredModulesInMof -notcontains $module)
+            {
+                $requiredModulesInMof += $Module
+            } 
+        }
         #Default {Write-Output $_}
     }
 
