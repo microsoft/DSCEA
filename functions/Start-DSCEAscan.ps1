@@ -180,8 +180,14 @@ param
                     else {
                         $session = New-PSSession -ComputerName $Computer
                     }
-                    Copy-DSCResource -PSSession $session -ModulestoCopy $ModulesRequired
-                    Remove-PSSession $session
+
+                    if ($Session) {
+                        Copy-DSCResource -PSSession $session -ModulestoCopy $ModulesRequired
+                                Remove-PSSession $session
+                    }
+                    else {
+                        Write-Warning "PSSession to copy required modules could not be setup. Could not copy required modules!"
+                    }
                 }
                 if($PSBoundParameters.ContainsKey('CimSession')) {
                     $DSCJob = Test-DSCConfiguration -ReferenceConfiguration $mofFile -CimSession $CimSession -AsJob | Wait-Job -Timeout $JobTimeout
