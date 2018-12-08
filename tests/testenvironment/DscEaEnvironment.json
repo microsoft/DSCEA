@@ -1,0 +1,462 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "type": "string"
+        },
+        "adminPassword": {
+            "type": "securestring"
+        }
+    },
+    "variables": {
+        "adminUserName":"[parameters('adminUsername')]", 
+        "adminPassword":"[parameters('adminPassword')]",
+        "vnetId": "[resourceId(resourceGroup().Name,'Microsoft.Network/virtualNetworks', 'DSCEAVnet')]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/Subnet1')]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2017-06-01",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "DSCEAVnet",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "dhcpOptions": {
+                    "dnsServers": [
+                        "10.0.0.4",
+                        "8.8.8.8"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "Subnet1",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "dcnic1",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2016-09-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "Microsoft.Network/virtualNetworks/DSCEAVnet"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.4",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "member1nic1",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2016-09-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "Microsoft.Network/virtualNetworks/DSCEAVnet",
+                "[resourceId('Microsoft.Network/publicIPAddresses', 'publicmgmtIP')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.5",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            },
+                        "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'publicmgmtIP')]"
+                              }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "member2nic1",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2016-09-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "Microsoft.Network/virtualNetworks/DSCEAVnet"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.6",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "member3nic1",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2016-09-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "Microsoft.Network/virtualNetworks/DSCEAVnet"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.0.7",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "dc",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2016-04-30-preview",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "Microsoft.Network/networkInterfaces/dcnic1"
+            ],
+            "properties": {
+                "osProfile": {
+                    "computerName": "dc",
+                    "adminUsername": "[variables('adminUsername')]",
+                    "adminPassword": "[variables('adminPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVmAgent": "true"
+                    }
+                },
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "fromImage",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS"
+                        }
+                    },
+                    "dataDisks": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', 'dcnic1')]"
+                        }
+                    ]
+                },
+                "licenseType": "Windows_Server"
+            }
+        },
+        {
+            "name": "member1",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2016-04-30-preview",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "Microsoft.Network/networkInterfaces/member1nic1",
+                "Microsoft.Compute/virtualMachines/dc/extensions/DSC.CreateAD"
+            ],
+            "properties": {
+                "osProfile": {
+                    "computerName": "member1",
+                    "adminUsername": "[variables('adminUsername')]",
+                    "adminPassword": "[variables('adminPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVmAgent": "true"
+                    }
+                },
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "fromImage",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS"
+                        }
+                    },
+                    "dataDisks": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', 'member1nic1')]"
+                        }
+                    ]
+                },
+                "licenseType": "Windows_Server"
+            }
+        },
+        {
+            "name": "member2",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2016-04-30-preview",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "Microsoft.Network/networkInterfaces/member2nic1",
+                "Microsoft.Compute/virtualMachines/dc/extensions/DSC.CreateAD"
+            ],
+            "properties": {
+                "osProfile": {
+                    "computerName": "member2",
+                    "adminUsername": "[variables('adminUsername')]",
+                    "adminPassword": "[variables('adminPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVmAgent": "true"
+                    }
+                },
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "fromImage",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS"
+                        }
+                    },
+                    "dataDisks": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', 'member2nic1')]"
+                        }
+                    ]
+                },
+                "licenseType": "Windows_Server"
+            }
+        },
+        {
+            "name": "member3",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2016-04-30-preview",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "Microsoft.Network/networkInterfaces/member3nic1",
+                "Microsoft.Compute/virtualMachines/dc/extensions/DSC.CreateAD"
+            ],
+            "properties": {
+                "osProfile": {
+                    "computerName": "member3",
+                    "adminUsername": "[variables('adminUsername')]",
+                    "adminPassword": "[variables('adminPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVmAgent": "true"
+                    }
+                },
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2012-R2-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "fromImage",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS"
+                        }
+                    },
+                    "dataDisks": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', 'member3nic1')]"
+                        }
+                    ]
+                },
+                "licenseType": "Windows_Server"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "dc/DSC.CreateAD",
+            "apiVersion": "2015-06-15",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+              "[resourceId('Microsoft.Compute/virtualMachines', 'dc')]"
+            ],
+            "properties": {
+              "publisher": "Microsoft.Powershell",
+              "type": "DSC",
+              "typeHandlerVersion": "2.19",
+              "autoUpgradeMinorVersion": true,
+              "settings": {
+                "ModulesUrl": "https://raw.githubusercontent.com/krjhitch/ARMandDSCDeploy/master/01_SingleADDC/artifacts/CreateADPDC.zip",
+                "ConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
+                "Properties": {
+                  "DomainName": "domain.local",
+                  "AdminCreds": {
+                    "UserName": "[variables('adminUsername')]",
+                    "Password": "PrivateSettingsRef:AdminPassword"
+                  }
+                }
+              },
+              "protectedSettings": {
+                "Items": {
+                  "AdminPassword": "[variables('adminPassword')]"
+                }
+              }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "member1/DSC.JoinAD",
+            "apiVersion": "2015-06-15",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', 'member1')]"
+            ],
+            "properties": {
+              "publisher": "Microsoft.Powershell",
+              "type": "DSC",
+              "typeHandlerVersion": "2.19",
+              "autoUpgradeMinorVersion": true,
+              "settings": {
+                "ModulesUrl": "https://github.com/Microsoft/DSCEA/raw/dev/tests/CreateADPDC.zip",
+                "ConfigurationFunction": "CreateADPDC.ps1\\JoinAD",
+                "Properties": {
+                  "DomainName": "domain.local",
+                  "AdminCreds": {
+                    "UserName": "[variables('adminUsername')]",
+                    "Password": "PrivateSettingsRef:AdminPassword"
+                  }
+                }
+              },
+              "protectedSettings": {
+                "Items": {
+                  "AdminPassword": "[variables('adminPassword')]"
+                }
+              }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "member2/DSC.JoinAD",
+            "apiVersion": "2015-06-15",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', 'member2')]"
+            ],
+            "properties": {
+              "publisher": "Microsoft.Powershell",
+              "type": "DSC",
+              "typeHandlerVersion": "2.19",
+              "autoUpgradeMinorVersion": true,
+              "settings": {
+                "ModulesUrl": "https://github.com/Microsoft/DSCEA/raw/dev/tests/CreateADPDC.zip",
+                "ConfigurationFunction": "CreateADPDC.ps1\\JoinAD",
+                "Properties": {
+                  "DomainName": "domain.local",
+                  "AdminCreds": {
+                    "UserName": "[variables('adminUsername')]",
+                    "Password": "PrivateSettingsRef:AdminPassword"
+                  }
+                }
+              },
+              "protectedSettings": {
+                "Items": {
+                  "AdminPassword": "[variables('adminPassword')]"
+                }
+              }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "member3/DSC.JoinAD",
+            "apiVersion": "2015-06-15",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', 'member3')]"
+            ],
+            "properties": {
+              "publisher": "Microsoft.Powershell",
+              "type": "DSC",
+              "typeHandlerVersion": "2.19",
+              "autoUpgradeMinorVersion": true,
+              "settings": {
+                "ModulesUrl": "https://github.com/Microsoft/DSCEA/raw/dev/tests/CreateADPDC.zip",
+                "ConfigurationFunction": "CreateADPDC.ps1\\JoinAD",
+                "Properties": {
+                  "DomainName": "domain.local",
+                  "AdminCreds": {
+                    "UserName": "[variables('adminUsername')]",
+                    "Password": "PrivateSettingsRef:AdminPassword"
+                  }
+                }
+              },
+              "protectedSettings": {
+                "Items": {
+                  "AdminPassword": "[variables('adminPassword')]"
+                }
+              }
+            }
+        },
+        {          
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "publicmgmtIP",    
+            "apiVersion": "2016-03-30",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic"
+            },
+            "dependson":[
+                "Microsoft.Network/virtualNetworks/DSCEAVnet"
+            ]
+        }
+    ]
+}

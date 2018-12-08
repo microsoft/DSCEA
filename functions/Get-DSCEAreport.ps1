@@ -88,7 +88,7 @@ This command returns non-compliant configuration file items detected, grouped by
         $results | 
         select-object -ExpandProperty Compliance | Where-Object {$_.PSComputerName -ne $null} |
         select-object @{Name="Computer";Expression={$_.PSComputerName}}, @{Name="Compliant";Expression={$_.InDesiredState}} | Sort-Object -Property Compliant |
-        ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
+        ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | foreach-object{$_ -replace "<td>True</td>", "<td bgcolor='#008000'>True</td>" -replace "<td>False</td>", "<td bgcolor='#DF0101'>False</td>"} | 
         Out-File (Join-Path -Path $OutPath -ChildPath 'OverallComplianceReport.html')
         Get-ItemProperty (Join-Path -Path $OutPath -ChildPath 'OverallComplianceReport.html')
     }
@@ -98,7 +98,7 @@ This command returns non-compliant configuration file items detected, grouped by
                 $_.ResourcesNotInDesiredState | 
                 Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
             }
-        } | ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
+        } | ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | foreach-object{$_ -replace "<td>True</td>", "<td bgcolor='#008000'>True</td>" -replace "<td>False</td>", "<td bgcolor='#DF0101'>False</td>"} | 
         Out-File (Join-Path -Path $OutPath -ChildPath 'DetailedComplianceReport.html')
         Get-ItemProperty (Join-Path -Path $OutPath -ChildPath 'DetailedComplianceReport.html')
     }
@@ -109,7 +109,7 @@ This command returns non-compliant configuration file items detected, grouped by
                 $_.ResourcesNotInDesiredState | ForEach-Object {$_ | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState}
             }
         } | Where-object {$_.InstanceName -ieq $ItemName} | Sort-Object -Property InDesiredState |
-        ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
+        ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | foreach-object{$_ -replace "<td>True</td>", "<td bgcolor='#008000'>True</td>" -replace "<td>False</td>", "<td bgcolor='#DF0101'>False</td>"} | 
         Out-File (Join-Path -Path $OutPath -ChildPath "ItemComplianceReport-$ItemName.html")
         Get-ItemProperty (Join-Path -Path $OutPath -ChildPath "ItemComplianceReport-$ItemName.html")
     }
@@ -119,7 +119,7 @@ This command returns non-compliant configuration file items detected, grouped by
                 $_.ResourcesNotInDesiredState | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
                 $_.ResourcesInDesiredState | Select-Object @{Name="Computer";Expression={$_.PSComputerName}}, ResourceName, InstanceName, InDesiredState
             }
-        } | ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | 
+        } | ConvertTo-HTML -Head $webstyle -body "<img src='C:\ProgramData\DSCEA\logo.png'/><br>","<titlesection>DSC Configuration Report</titlesection><br>","<datesection>Report last run on",$date,"</datesection><p>" | foreach-object{$_ -replace "<td>True</td>", "<td bgcolor='#008000'>True</td>" -replace "<td>False</td>", "<td bgcolor='#DF0101'>False</td>"} | 
         Out-File (Join-Path -Path $OutPath -ChildPath "ComputerComplianceReport-$ComputerName.html")
         Get-ItemProperty (Join-Path -Path $OutPath -ChildPath "ComputerComplianceReport-$ComputerName.html")
     }
